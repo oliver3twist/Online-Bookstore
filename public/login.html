@@ -18,7 +18,7 @@ body {
 .container {
     margin: 0;
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%); padding: 20px;
     background-color: white;
@@ -65,6 +65,23 @@ register {
     text-align: center;
 }
 </style>
+
+<!--FIREBASE STUFF-->
+<!--Firebase App is always required and must be first-->
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCU3PKSSVSxi2h3jhbGtBvI--r7Wgpx0l8",
+                authDomain: "bookstore-ef084.firebaseapp.com",
+                databaseURL: "https://bookstore-ef084.firebaseio.com",
+                projectId: "bookstore-ef084",
+                storageBucket: "gs://bookstore-ef084.appspot.com",
+                messagingSenderId: "540736543010"
+            };
+            firebase.initializeApp(config);
+        </script>
+
 </head>
 <body>
 
@@ -74,37 +91,21 @@ register {
   <div class="container">
 
 
-    <h1>Register</h1>
+    <h1>Login</h1>
     <hr>
 
-    <label for="email"><b>E-mail</b></label>
+    <label for="username"><b>Username</b></label>
     
-<input type="email" placeholder="Enter E-mail" name="user" required>
+<input type="username" placeholder="Enter Username" name="user" required>
 
    
  <label for="password"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="pass" required>
-       
-    <input type="password" placeholder="Re-Enter Password" name="pass2" required>
-      
-      <label for="address"><b>Shipping Address</b></label> 
-<input type="address" placeholder="Enter Shipping Address" name="user" required>
-      
-      <label for="address"><b>Billing Address</b></label> 
-<input type="address" placeholder="Enter Billing Address" name="user" required>
-      
-      <!-- Credit Card -->
-      <label for="creditCard"><b>Credit Card Info</b></label> 
-      <input type="name" placeholder="Enter Credit Card Holder Name" name="user" required>
-      <input type="name" placeholder="Enter Credit Card Number" name="user" required>
-      <input type="name" placeholder="Enter Credit Card CVV" name="user" required>
-      <input type="name" placeholder="Enter Credit Card Exipration Date (mm/yyyy)" name="user" required>
-      
-      
-      
  <hr/>  
-<input type="submit" class="loginbtn" value="Register">
- </div>
+<input type="submit" class="loginbtn" value="Login">
+<div class="signin">
+    <p>Not yet registered? <a href="register.html">Register</a>.</p>
+ </div> </div>
 </form>
 
 </body>
