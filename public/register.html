@@ -42,7 +42,7 @@ hr {
     margin-bottom: 25px;
 }
 /* Submit button */
-.loginbtn {
+.register_input_button {
     background-color: #000000;
     color: white;
     padding: 20px 22px;
@@ -52,7 +52,7 @@ hr {
     width: 100%;
     opacity: 0.9;
 }
-.loginrbtn:hover {
+.register_input_button:hover {
     opacity: 1;
 }
 /* Add a blue text color to links */
@@ -81,6 +81,8 @@ register {
             };
             firebase.initializeApp(config);
         </script>
+
+        <script src="../scripts/register_scripts.js"></script>
 
 </head>
 <body>
@@ -117,10 +119,11 @@ register {
       <input type="name" placeholder="Enter Credit Card CVV" name="user" required>
       <input type="name" placeholder="Enter Credit Card Exipration Date (mm/yyyy)" name="user" required>
  -->     
-      
+ <!--<button type="button" class="register_input_btn" id="register_btn" onclick="registerUserInFirebase()">Register</button>     -->
       
  <hr/>  
 <input type="submit" class="register_input_btn" id="register_btn" onclick="registerUserInFirebase()" value="Register">
+
  </div>
 </form>
 
