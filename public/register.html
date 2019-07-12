@@ -82,14 +82,14 @@ register {
             firebase.initializeApp(config);
         </script>
 
-        <script src="../scripts/register_scripts.js"></script>
+        <script src="./scripts/register_scripts.js"></script>
 
 </head>
 <body>
 
 
-
-<form action="/login" method="post">
+<!--<form action="/login" method="post">-->
+<form method="post">
   <div class="container">
 
 
@@ -98,7 +98,7 @@ register {
 
     <label for="email"><b>E-mail</b></label>
     
-<input type="email" class="register_input_text" id="register_username" placeholder="Enter E-mail" name="user" required>
+<input type="email" class="register_input_text" id="register_email" placeholder="Enter E-mail" name="user" required>
 
    
  <label for="password"><b>Password</b></label>

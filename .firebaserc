@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "onlinebookstore": "online-book-store-d4ea4",
+    "bookstore": "bookstore-ef084",
+    "default": "bookstore-ef084"
+  }
+}
