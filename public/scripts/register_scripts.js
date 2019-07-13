@@ -19,12 +19,7 @@ function registerUserInFirebase() {
         return;
     }
 
-    firebase.auth().createUserWithEmailAndPassword(email, p1).then(function(user) {
-        if(user) {
-            //addUserToDB()
-        }
-    }).catch(function(error) 
-    	{
+    firebase.auth().createUserWithEmailAndPassword(email, p1).catch(function(error) {
         	var errorCode = error.code;
         	var errorMessage = error.message;
         	console.log("ERROR");
@@ -35,5 +30,20 @@ function registerUserInFirebase() {
         	    alert(errorMessage);
         	}
     	}
-    )
-}
+    );
+	
+	firebase.auth().onAuthStateChanged(function(user){
+		if (user) {
+			user.sendEmailVerification().then(function() {
+		  // Email sent.
+		  window.open("./confirmRegister.html", "_self");// for testing-PJ
+		}).catch(function(error) {
+		  // An error happened.
+		});
+			
+			console.log(user.uid);//test if user is logged in.
+		}
+	});
+	
+}//registerUserInFirebase
+

@@ -10,6 +10,24 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="bookstore.css" />
+	
+	<!--FIREBASE STUFF-->
+	<!--Firebase App is always required and must be first-->
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCU3PKSSVSxi2h3jhbGtBvI--r7Wgpx0l8",
+                authDomain: "bookstore-ef084.firebaseapp.com",
+                databaseURL: "https://bookstore-ef084.firebaseio.com",
+                projectId: "bookstore-ef084",
+                storageBucket: "gs://bookstore-ef084.appspot.com",
+                messagingSenderId: "540736543010"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+        <script src="./scripts/logged_in_user_scripts.js"></script>
 </head>
     
     
@@ -48,14 +66,18 @@
     </ul>
     
     <!-- Navbar links-right -->
-    <ul class="navbar-nav" id="barRight">
+	<script>
+		checkLoggedin();
+	</script>
+		
+		
+		<ul class="navbar-nav" id="barRight">
         <li class="nav-item mx-2">
         <a class="nav-link" id="barLink" href="register.html">Sign up</a>
         </li>
         <li class="nav-item mx-2">
         <a class="nav-link" id="barLink" href="login.html">Login</a>
-        </li>  
-          
+        </li>       
          
         <!-- search bar -->      
         <form class="form-inline mx-2" action="/action_page.php">
