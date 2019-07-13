@@ -82,6 +82,8 @@ register {
             firebase.initializeApp(config);
         </script>
 
+        <script src="./scripts/login_scripts.js"></script>
+
 </head>
 <body>
 
@@ -96,13 +98,13 @@ register {
 
     <label for="username"><b>Username</b></label>
     
-<input type="username" placeholder="Enter Username" name="user" required>
+<input type="username" class="login_input_text" id="login_username" placeholder="Enter Username" name="user" required>
 
    
  <label for="password"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="pass" required>
+    <input type="password" class="login_input_text" id="login_password" placeholder="Enter Password" name="pass" required>
  <hr/>  
-<input type="submit" class="loginbtn" value="Login">
+<input type="submit" class="loginbtn" id="login_btn" onclick="loginWithEmailAndPassword()" value="Login">
 <div class="signin">
     <p>Not yet registered? <a href="register.html">Register</a>.</p>
  </div> </div>
