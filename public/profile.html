@@ -11,6 +11,22 @@
 
     <link rel="stylesheet" href="bookstore.css" />
     <link rel="stylesheet" href="profile.css" />
+	<!--FIREBASE STUFF-->
+<!--Firebase App is always required and must be first-->
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCU3PKSSVSxi2h3jhbGtBvI--r7Wgpx0l8",
+                authDomain: "bookstore-ef084.firebaseapp.com",
+                databaseURL: "https://bookstore-ef084.firebaseio.com",
+                projectId: "bookstore-ef084",
+                storageBucket: "gs://bookstore-ef084.appspot.com",
+                messagingSenderId: "540736543010"
+            };
+            firebase.initializeApp(config);
+        </script>
+		<script src="./scripts/logged_in_user_scripts.js"></script>
 </head>  
 <body>
 
@@ -39,10 +55,10 @@
           <a class="nav-link" id="barLink" href="homeReg.html">Home</a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="#">Books</a>
+        <a class="nav-link" id="barLink" href="./booklist.html">Books</a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="#">Promotions</a>
+        <a class="nav-link" id="barLink" href="./promotions.html">Promotions</a>
       </li>
       
     </ul>
@@ -50,11 +66,12 @@
     <!-- Navbar links-right -->
       <ul class="navbar-nav" id="barRight"> 
        <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="#">Profile</a>
+        <a class="nav-link" id="barLink-profile" href="./profile.html"></a>
+		<script>uniqueProfile();</script>
       </li> 
           
     <li class="nav-item mx-2">
-        <a class="nav-link px-0 py-0" href="#">
+        <a class="nav-link px-0 py-0" href="./cart.html">
             <img src="images/cart3.png" id="cartIcon" alt="Shopping Cart">
         </a>
     </li> 
@@ -81,9 +98,9 @@
         
     <div class="col profileBox">
         <h4>Shipping Address: </h4>
-        <p>1234 test address lane</p>
-        <p>Alpharetta, GA, 30022</p>
-            
+        <p id="shipstreet"></p>
+        <p id="shipcity"></p>
+            <script>uniqueProfileShipping();</script>
             <!-- Button to Open the Modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal1">
                 Change
@@ -101,25 +118,32 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
 		
         </div>
+		<!-- Modal body -->
+		<div class="modal-body">
 		<form>
-		<label for="street"><b>Street</b></label>
-    
-<input class="login_input_text" id="shippingstreet" placeholder="Shipping Street" name="shippingstreet" required>
-<br>
-   
- <label for="Number"><b>Number</b></label>
-    <input class="login_input_text" id="shippingnumber" placeholder="Shipping Number" name="shippingnumber" required>
+			<div class="form-group my-1">
+				<!-- <label for="Number"><b>Number</b></label> -->
+				<input type="text" class="form-control" id="shippingnumber" placeholder="Number" name="shippingnumber" required>
+			</div>
+			<div class="form-group my-1">
+				<!-- <label for="street"><b>Street</b></label> -->
+				<input type="text" class="form-control" id="shippingstreet" placeholder="Street" name="shippingstreet" required>
+			</div>
+			<div class="form-group my-1">
+				<!-- <label for="City"><b>City</b></label> -->
+				<input type="text" class="form-control" id="shippingcity" placeholder="City" name="shippingcity" required>
+			</div>
+			<div class="form-group my-1">
+				<!-- <label for="State"><b>State</b></label> -->
+				<input type="text" class="form-control" id="shippingstate" placeholder="State" name="shippingstate" required>
+			</div>
+			<div class="form-group my-1">
+				<!-- <label for="Zip"><b>Zip Code</b></label> -->
+				<input type="text" class="form-control" id="shippingzip" placeholder="Zip Code" name="shippingzip" required>
+			</div>
+			
+			<button type="button" class="btn btn-primary" id="register_btn" onclick="updateShippingAddress()" value="Update">Update</button>
 		</form>
-
-      <!-- Modal body -->
-        <div class="modal-body">
-        <form action="/action_page.php">
-        <div class="form-group my-1">
-        <input type="text" class="form-control" id="email" placeholder="Enter new address" name="email">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
         </div> 
         </div>
         </div>
@@ -129,8 +153,9 @@
         <!-- Billing Address -->
         <div class="col profileBox">
         <h4>Billing Address: </h4>
-        <p>1234 test address lane</p>
-        <p>Alpharetta, GA, 30022</p>
+        <p id="billstreet"></p>
+        <p id="billcity"></p>
+		<script>uniqueProfileBilling();</script>
             <!-- Button to Open the Modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal2">
                 Change
@@ -149,14 +174,31 @@
         </div>
 
       <!-- Modal body -->
-        <div class="modal-body">
-        <form action="/action_page.php">
-        <div class="form-group my-1">
-        <input type="text" class="form-control" id="email" placeholder="Enter new address" name="email">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+		<div class="modal-body">
+		<form>
+			<div class="form-group my-1">
+				<!-- <label for="Number"><b>Number</b></label> -->
+				<input type="text" class="form-control" id="billingnumber" placeholder="Number" name="billingnumber" required>
+			</div>
+			<div class="form-group my-1">
+				<!-- <label for="street"><b>Street</b></label> -->
+				<input type="text" class="form-control" id="billingstreet" placeholder="Street" name="billingstreet" required>
+			</div>
+			<div class="form-group my-1">
+				<!-- <label for="City"><b>City</b></label> -->
+				<input type="text" class="form-control" id="billingcity" placeholder="City" name="billingcity" required>
+			</div>
+			<div class="form-group my-1">
+				<!-- <label for="State"><b>State</b></label> -->
+				<input type="text" class="form-control" id="billingstate" placeholder="State" name="billingstate" required>
+			</div>
+			<div class="form-group my-1">
+				<!-- <label for="Zip"><b>Zip Code</b></label> -->
+				<input type="text" class="form-control" id="billingzip" placeholder="Zip Code" name="billingzip" required>
+			</div>
+			
+			<button type="button" class="btn btn-primary" id="register_btn" onclick="updateBillingAddress()" value="Update">Update</button>
+		</form>
             </div> 
             </div>
             </div>

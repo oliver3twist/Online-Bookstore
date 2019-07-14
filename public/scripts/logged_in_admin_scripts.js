@@ -1,3 +1,36 @@
+function checkAdmin(){
+	firebase.auth().onAuthStateChanged(function(user) {//checks if user is signed in.
+	  if (user) {//user is signed in.
+		var db = firebase.firestore();
+			var docRef = db.collection("users").doc(user.uid);
+
+			docRef.get().then(function(doc) {
+			if (doc.exists) {
+				if(doc.data().Admin==false){
+					window.open("./homeReg.html", "_self");
+				}
+				console.log("Document data:", doc.data());
+			} else {
+				window.open("./index.html", "_self");// refresh page
+				// doc.data() will be undefined in this case
+				console.log("No such document!");
+			}
+			}).catch(function(error) {
+				console.log("Error getting document:", error);
+			});
+		console.log("Logged in User uid:"+ user.uid);
+		return true;
+	  } else {
+		  window.open("./index.html", "_self");// refresh page
+		  console.log("User is not logged in");
+		  return false;
+		// No user is signed in.
+	  }
+	});
+	
+}
+
+
 function checkLoggedin(){
 	firebase.auth().onAuthStateChanged(function(user) {//checks if user is signed in.
 	  if (user) {//user is signed in.
@@ -157,4 +190,55 @@ function updateBillingAddress(){
 			});//end add to db
 		}//if(user)
 	});
+}
+
+function promoteUser(userid){
+	console.log("user id promote: "+userid);
+	
+}
+
+function showAllUsers(){
+	
+	  
+	var db = firebase.firestore();
+	db.collection("users").get().then(function(querySnapshot) {
+		var table = document.getElementById("usertable");
+    querySnapshot.forEach(function(doc) {
+		
+		var tr = document.createElement("TR");
+		newUserObj = document.getElementById(doc.data().FirstName);
+		
+		
+		var nametd=document.createElement("TD");
+		nametd.innerHTML=doc.data().FirstName+ " " + doc.data().LastName; 
+		tr.appendChild(nametd);
+		
+		var statustd=document.createElement("TD");
+		if(doc.data().status==true){
+			statustd.innerHTML="Not Suspended";
+		}else{
+			statustd.innerHTML="Suspended";
+		}
+		tr.appendChild(statustd);
+		
+		
+		var promotetd=document.createElement("TD");
+		var btn = document.createElement("BUTTON");		// Create a <button> element
+		btn.innerHTML = "Promote";                   // Insert text
+		
+		//var x='<button onclick="promoteUser('+doc.id+')">Promote</button>'
+		if(btn==null){
+			console.log("button is null");
+		}
+		promotetd.appendChild(btn);
+		tr.appendChild(promotetd);
+		
+		table.appendChild(tr);
+		
+		
+        // doc.data() is never undefined for query doc snapshots
+        console.log(doc.id, " => ", doc.data());
+    });
+});
+	
 }

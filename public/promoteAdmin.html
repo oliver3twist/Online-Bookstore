@@ -10,14 +10,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="bookstore.css" />
-    <link rel="stylesheet" href="profile.css" />
-</head>  
-<body>
-
-  <div class="jumbotron text-center heading" >
-  <h1 id="title">Borders Books</h1>
-  <p id="slogan">The premier online bookstore</p> 
-  <!--FIREBASE STUFF-->
+    <link rel="stylesheet" href="promotions.css"/>
+	<!--FIREBASE STUFF-->
 <!--Firebase App is always required and must be first-->
         <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
         <script>
@@ -35,6 +29,15 @@
 		<script src="./scripts/logged_in_user_scripts.js"></script>
 		<script src="./scripts/logged_in_admin_scripts.js"></script>
 		<script>checkAdmin();</script>
+</head>
+    
+    
+<body>
+
+
+  <div class="jumbotron text-center heading" >
+  <h1 id="title">Borders Books</h1>
+  <p id="slogan">The premier online bookstore</p> 
   </div>
     
     
@@ -72,7 +75,7 @@
       </li> 
           
     <li class="nav-item mx-2">
-        <a class="nav-link px-0 py-0" href="#">
+        <a class="nav-link px-0 py-0" href="checkout.html">
             <img src="images/cart3.png" id="cartIcon" alt="Shopping Cart">
         </a>
     </li> 
@@ -91,38 +94,78 @@
 </nav>
     <!-- end of header content -->
     
-<div id="top" class="container mt-5 adminControls">
-    <h2>Admin Controls</h2>
-    <div class=row>
-        <div class="col messageBox">
-        <h5>Manage Available Books</h5>
-        <button type="button" class="btn btn-primary my-2 mx-5">Add Books</button>
-            
-        <button type="button" class="btn btn-primary my-2 mx-5" id=adminBtn>Delete Books</button>
-            
-        <button type="button" class="btn btn-primary my-2 mx-5" id=adminBtn>Update Book</button>
+<div class="container">  
+    <h3 id="promTitle">All Users</h3>
+	<script> showAllUsers();</script>
+	<table id="usertable">
+	<tr>
+    <th>Name</th>
+    <th>Status</th> 
+    <th>Admin</th>
+	<th>Promote/Demote</th>
+	<th>Suspend/Unsuspend</th>
+  </tr>
+  <tr>
+    <td>Admin Account</td>
+    <td>Unsuspend</td> 
+    <td>True</td>
+	<td></td>
+	<td></td>
+  </tr>
+  
+  
+	
+	</table>
+	
+	
+    <ul class="userlist">
+        <script>showAllUsers();</script>
+    <li>
+        <div class="line"> Admin <span class="code">Account</span>
         </div>
-        
-        <div class="col messageBox">
-        <h5>Manage Promotions</h5>
-        <button type="button" class="btn btn-primary my-2 mx-5">Add Promotions</button>
-            
-        <button type="button" class="btn btn-primary my-2 mx-5" id=adminBtn>Delete Promotions</button>    
+        <div class="sr">
+		<button class="btn btn-success" id="promote" type="button" onclick="">Promote</button>
+        <button class="btn btn-success" id="demote" type="button" onclick="">Demote</button>
         </div>
-        
-        <div class="col messageBox">
-        <h5>Manage Users</h5>
-        <button type="button" class="btn btn-primary my-2 mx-5" onclick="window.location.href ='./promoteAdmin.html';">Promote Users</button>
-            
-        <button type="button" class="btn btn-primary my-2 mx-5" id=adminBtn>Suspend Users</button>
-        <button type="button" class="btn btn-primary my-2 mx-5" id=adminBtn>Delete Users</button> 
+    </li>
+    <li> 
+        <div class="line"> 50% off Next Order: <span class="code">"Save76"</span>
         </div>
-        
+        <div class="sr">
+        <a class="send" href="#"> Send to Users </a>
+        <a class="remove" href="#"> Remove </a>
+        </div>
+    </li>
+    <li> 
+       <div class="line"> 50% off Next Order: <span class="code">"Save76"</span>
+        </div>
+        <div class="sr">
+        <a class="send" href="#"> Send to Users </a>
+        <a class="remove" href="#"> Remove </a>
+        </div>
+    </li> 
+    <li>
+        <div class="line"> 50% off Next Order: <span class="code">"Save76"</span>
+        </div>
+        <div class="sr">
+        <a class="send" href="#"> Send to Users </a>
+        <a class="remove" href="#"> Remove </a>
+        </div>
+    </li>  
+    <div class="addCont">   
+        <button type="button" class="btn btn-primary" href="#">+ Add Promotion</button>
     </div>
-</div>
+        
+    </ul>
     
     
-
-</body>   
+    
+</div>  
+    
+    
+    
+    
+</body>
+    
     
 </html>

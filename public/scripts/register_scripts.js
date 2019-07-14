@@ -38,25 +38,92 @@ function registerUserInFirebase() {
 		db.collection("users").doc(user.uid).set({
 		FirstName: document.getElementById("firstname").value,
 		LastName: document.getElementById("lastname").value ,
+		Admin: false,//is admin?
+		status: true,//not suspended
 		})
 		.then(function() {
 			console.log("Document successfully written!");
 			//successfully written to db, new send email verification
-				user.sendEmailVerification().then(function() {
+				
+				})
+		.catch(function(error) {
+			console.error("Error writing document: ", error);
+		});
+		
+		//start add to db
+		db.collection("billingaddress").doc(user.uid).set({
+		number: 0,
+		street: "",
+		city: "",
+		state: "",
+		zip: 0,
+		})
+		.then(function() {
+			console.log("Billing Address successfully written!");
+			//successfully written to db, new send email verification
+		}).catch(function(error) {
+			console.error("Error writing document: ", error);
+		});//end add to db
+		
+		//start add to db
+		db.collection("shippingaddress").doc(user.uid).set({
+		number: 0,
+		street: "",
+		city: "",
+		state: "",
+		zip: 0,
+		})
+		.then(function() {
+			console.log("Shipping Address successfully written!");
+			//successfully written to db, new send email verification
+		}).catch(function(error) {
+			console.error("Error writing document: ", error);
+		});//end add to db
+		
+		//start add to db
+		db.collection("creditcard").doc(user.uid).set({
+		number: 0,
+		date: 0,
+		})
+		.then(function() {
+			console.log("Credit Card successfully written!");
+			//successfully written to db, new send email verification
+		}).catch(function(error) {
+			console.error("Error writing document: ", error);
+		});//end add to db
+		
+		//start add to db
+		db.collection("orderhistory").doc(user.uid).set({
+		order: [{ bookid:"" , number: 0, date:0}] ,
+		})
+		.then(function() {
+			console.log("Order History successfully written!");
+			//successfully written to db, new send email verification
+		}).catch(function(error) {
+			console.error("Error writing document: ", error);
+		});//end add to db
+		
+		//start add to db
+		db.collection("cart").doc(user.uid).set({
+		 book: [{ bookid:"" , number: 0}] ,
+		})
+		.then(function() {
+			console.log("Cart successfully written!");
+			user.sendEmailVerification().then(function() {
 				// Email sent.
 				  window.open("./confirmRegister.html", "_self");// for testing-PJ
 				}).catch(function(error) {
 					console.log("Error Sending Email");
 				  // An error happened.
 				});
-				})
-		.catch(function(error) {
+			//successfully written to db, new send email verification
+		}).catch(function(error) {
 			console.error("Error writing document: ", error);
-		});
+		});//end add to db
 		
-			
+		
 			console.log(user.uid);//test if user is logged in.
-		}
+		}//if(user)
 	});
 	
 	

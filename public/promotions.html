@@ -11,6 +11,23 @@
 
     <link rel="stylesheet" href="bookstore.css" />
     <link rel="stylesheet" href="promotions.css"/>
+	<!--FIREBASE STUFF-->
+<!--Firebase App is always required and must be first-->
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+	<script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCU3PKSSVSxi2h3jhbGtBvI--r7Wgpx0l8",
+                authDomain: "bookstore-ef084.firebaseapp.com",
+                databaseURL: "https://bookstore-ef084.firebaseio.com",
+                projectId: "bookstore-ef084",
+                storageBucket: "gs://bookstore-ef084.appspot.com",
+                messagingSenderId: "540736543010"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+        <script src="./scripts/logged_in_user_scripts.js"></script>
 </head>
     
     
@@ -23,7 +40,7 @@
   </div>
     
     
-  <!-- Navbar -->
+   <!-- Navbar -->
   <nav class="navbar navbar-expand-md bg-dark navbar-dark">
       
   <!-- Brand -->
@@ -42,10 +59,10 @@
           <a class="nav-link" id="barLink" href="homeReg.html">Home</a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="#">Books</a>
+        <a class="nav-link" id="barLink" href="./booklist.html">Books</a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="#">Promotions</a>
+        <a class="nav-link" id="barLink" href="./promotions.html">Promotions</a>
       </li>
       
     </ul>
@@ -53,11 +70,12 @@
     <!-- Navbar links-right -->
       <ul class="navbar-nav" id="barRight"> 
        <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="#">Profile</a>
+        <a class="nav-link" id="barLink-profile" href="./profile.html"></a>
+		<script>uniqueProfile();</script>
       </li> 
           
     <li class="nav-item mx-2">
-        <a class="nav-link px-0 py-0" href="checkout.html">
+        <a class="nav-link px-0 py-0" href="./cart.html">
             <img src="images/cart3.png" id="cartIcon" alt="Shopping Cart">
         </a>
     </li> 
