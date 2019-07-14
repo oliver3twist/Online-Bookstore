@@ -26,7 +26,7 @@ body {
 #cartIcon {
     width: 40px;      
 }
-#barLink {
+#barLink, #barLink-profile {
     color: whitesmoke;
 }
 #barLeft {

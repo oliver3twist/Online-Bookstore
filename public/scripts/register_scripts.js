@@ -34,16 +34,33 @@ function registerUserInFirebase() {
 	
 	firebase.auth().onAuthStateChanged(function(user){
 		if (user) {
-			user.sendEmailVerification().then(function() {
-		  // Email sent.
-		  window.open("./confirmRegister.html", "_self");// for testing-PJ
-		}).catch(function(error) {
-		  // An error happened.
+			var db = firebase.firestore();
+		db.collection("users").doc(user.uid).set({
+		FirstName: document.getElementById("firstname").value,
+		LastName: document.getElementById("lastname").value ,
+		})
+		.then(function() {
+			console.log("Document successfully written!");
+			//successfully written to db, new send email verification
+				user.sendEmailVerification().then(function() {
+				// Email sent.
+				  window.open("./confirmRegister.html", "_self");// for testing-PJ
+				}).catch(function(error) {
+					console.log("Error Sending Email");
+				  // An error happened.
+				});
+				})
+		.catch(function(error) {
+			console.error("Error writing document: ", error);
 		});
+		
 			
 			console.log(user.uid);//test if user is logged in.
 		}
 	});
+	
+	
+	
 	
 }//registerUserInFirebase
 
