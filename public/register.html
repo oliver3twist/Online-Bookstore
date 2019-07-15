@@ -2,69 +2,11 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-   font-family: Arial, Helvetica, sans-serif;
-    background-color: grey;
-}
-* {
-    box-sizing: border-box;
-}
-/* */
-    body {
-        background-image: url("images/stucco2.png");
-    }    
-    
-.container {
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); padding: 20px;
-    background-color: white;
-}
-/*Style for mandatory fields*/
-input[type=name], input[type=password], input[type=address], input[type=email], input[type=birthdate], input[type=username] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-}
-input[type=text]:focus, input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
-}
-/*Registration form style */
-hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
-}
-/* Submit button */
-.register_input_button {
-    background-color: #000000;
-    color: white;
-    padding: 20px 22px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    opacity: 0.9;
-}
-.register_input_button:hover {
-    opacity: 1;
-}
-/* Add a blue text color to links */
-register {
-    color: dodgerblue;
-}
-/* Set a grey background color and center the text of the "sign in" section */
-.signin {
-    padding:20px;background-color: #f1f1f1;
-    text-align: center;
-}
-</style>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="bookstore.css" >
+<link rel="stylesheet" href="login.css">
 
 <!--FIREBASE STUFF-->
 <!--Firebase App is always required and must be first-->
@@ -90,10 +32,10 @@ register {
 
 <!--<form action="/login" method="post">-->
 <form method="post">
-  <div class="container">
+  <div class="container mycontainer2">
 
 
-    <h1>Register</h1>
+    <h1 class="mt-3">Register</h1>
     <hr>
 
     <label for="email"><b>E-mail</b></label>
@@ -105,7 +47,7 @@ register {
     <input type="password" placeholder="Enter Password" name="pass" class="register_input_text" id="register_password" required>
        
     <input type="password" placeholder="Re-Enter Password" name="pass2" class="register_input_text" id="register_confirm_password" required>
-<!--      
+     
       <label for="address"><b>Shipping Address</b></label> 
 <input type="address" placeholder="Enter Shipping Address" name="user" required>
       
@@ -118,11 +60,12 @@ register {
       <input type="name" placeholder="Enter Credit Card Number" name="user" required>
       <input type="name" placeholder="Enter Credit Card CVV" name="user" required>
       <input type="name" placeholder="Enter Credit Card Exipration Date (mm/yyyy)" name="user" required>
- -->     
-
+   
+      
       
  <hr/>  
-<input type="submit" class="register_input_btn" id="register_btn" onclick="registerUserInFirebase()" value="Register">
+      
+<input type="submit" class="register_input_button" onclick="registerUserInFirebase()" value="Register">
 
  </div>
 </form>

@@ -1,0 +1,89 @@
+body {
+   font-family: Arial, Helvetica, sans-serif;
+    background-color: grey;
+}  
+    
+.mycontainer {
+    margin-top: 80px;
+    padding: ;
+    max-width: 800px;
+    border: solid darkgray thin;
+    border-radius: 7px;
+    background-color: white;
+}
+.mycontainer2 {
+    margin-top: 30px;
+    padding: ;
+    max-width: 800px;
+    border: solid darkgray thin;
+    border-radius: 7px;
+    background-color: white;
+}
+
+/*Style for mandatory fields*/
+input[type=name], input[type=password], input[type=address], input[type=email], input[type=birthdate], input[type=username] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+/*Registration form style */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+/* Submit button */
+.loginbtn {
+    background-color: #000000;
+    color: white;
+    padding: 20px 22px;
+    margin: 8px 0;
+    border: none;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 5px;
+}
+.loginrbtn:hover {
+    opacity: 1;
+}
+/* Add a blue text color to links */
+register {
+    color: dodgerblue;
+}
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    text-align: center;
+    border-radius: 5px;
+}
+
+/*Registration form style */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 20px;
+}
+/* Submit button */
+.register_input_button {
+    background-color: #000000;
+    color: white;
+    padding: 20px 22px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 5px;
+}
+.register_input_button:hover {
+    opacity: 1;
+}

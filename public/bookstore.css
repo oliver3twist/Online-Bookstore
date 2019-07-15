@@ -126,5 +126,27 @@ body {
     padding: 15px;
     background-color: white;
     border: solid thin black;
+    border-radius: 7px;
+}
+
+/*confirmation pages*/
+.confirmation {
+    text-align: right;
+}
+#order {
+    font-size: 13pt;
+}
+#details {
+    text-align: left;
+    text-decoration: underline;
+}
+.lineBreak {
+    border-bottom: solid thin;
+}
+#complete {
+    color: green;
+}
+.regConfirm {
+    margin-top: 25%;
 }
 
