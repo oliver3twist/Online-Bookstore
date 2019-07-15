@@ -43,25 +43,41 @@
 <input type="email" class="register_input_text" id="register_email" placeholder="Enter E-mail" name="user" required>
 
    
- <label for="password"><b>Password</b></label>
+ <label class="mt-2" for="password"><b>Password</b></label>
     <input type="password" placeholder="Enter Password" name="pass" class="register_input_text" id="register_password" required>
        
     <input type="password" placeholder="Re-Enter Password" name="pass2" class="register_input_text" id="register_confirm_password" required>
      
-      <label for="address"><b>Shipping Address</b></label> 
-<input type="address" placeholder="Enter Shipping Address" name="user" required>
+      <label class="mt-2" for="address">
+          <b>Shipping Address
+            <span class="optional"> (Optional)</span>
+        </b>
+      </label> 
       
-      <label for="address"><b>Billing Address</b></label> 
-<input type="address" placeholder="Enter Billing Address" name="user" required>
+      <input type="address" placeholder="Street" name="user">
+      <input type="address" placeholder="City" name="user">
+      <input type="address" placeholder="State" name="user">
+      <input type="address" placeholder="Zip Code" name="user">
+      
+      <label class="mt-2" for="address">
+          <b>Billing Address
+          <span class="optional"> (Optional)</span>
+          </b></label> 
+     <input type="address" placeholder="Street" name="user">
+      <input type="address" placeholder="City" name="user">
+      <input type="address" placeholder="State" name="user">
+      <input type="address" placeholder="Zip Code" name="user">
       
       
-      <label for="creditCard"><b>Credit Card Info</b></label> 
-      <input type="name" placeholder="Enter Credit Card Holder Name" name="user" required>
-      <input type="name" placeholder="Enter Credit Card Number" name="user" required>
-      <input type="name" placeholder="Enter Credit Card CVV" name="user" required>
-      <input type="name" placeholder="Enter Credit Card Exipration Date (mm/yyyy)" name="user" required>
+      <label class="mt-2" for="creditCard"><b>Credit Card Info
+          <span class="optional"> (Optional)</span>
+          </b></label> 
+      
+      <input type="name" placeholder="Credit Card Holder Name" name="user">
+      <input type="name" placeholder="Credit Card Number" name="user">
+      <input type="name" placeholder="Credit Card CVV" name="user">
+      <input class="mb-1" type="name" placeholder="Credit Card Exipration Date (mm/yyyy)" name="user">
    
-      
       
  <hr/>  
       

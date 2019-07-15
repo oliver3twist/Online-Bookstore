@@ -12,7 +12,7 @@ body {
     background-color: white;
 }
 .mycontainer2 {
-    margin-top: 30px;
+    margin-top: 35px;
     padding: ;
     max-width: 800px;
     border: solid darkgray thin;
@@ -24,7 +24,7 @@ body {
 input[type=name], input[type=password], input[type=address], input[type=email], input[type=birthdate], input[type=username] {
     width: 100%;
     padding: 15px;
-    margin: 5px 0 22px 0;
+    margin: 5px 0 10px 0;
     display: inline-block;
     border: none;
     background: #f1f1f1;
@@ -75,7 +75,7 @@ hr {
 .register_input_button {
     background-color: #000000;
     color: white;
-    padding: 20px 22px;
+    padding: 20px 20px;
     margin-top: 0px;
     margin-bottom: 10px;
     border: none;
@@ -86,4 +86,11 @@ hr {
 }
 .register_input_button:hover {
     opacity: 1;
+}
+/*----------------------*/
+
+
+.optional {
+    font-size: 11pt;
+    font-style: italic;
 }
