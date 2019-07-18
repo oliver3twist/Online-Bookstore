@@ -8,8 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="bookstore.css" />
+   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	
 	<!--FIREBASE STUFF-->
 	<!--Firebase App is always required and must be first-->
@@ -26,68 +25,29 @@
             };
             firebase.initializeApp(config);
         </script>
-
-        <script src="./scripts/logged_in_user_scripts.js"></script>
+		<script src="./scripts/login_scripts.js"></script><!-- this is for proof of logging in and out. Will be deleted-->
+		<script src="./scripts/logged_in_user_scripts.js"></script>
+	<link rel="stylesheet" href="bookstore.css" />
 </head>
     
     
 <body>
 
-
+	
   <div class="jumbotron text-center heading" >
   <h1 id="title">Borders Books</h1>
   <p id="slogan">The premier online bookstore</p> 
   </div>
     
-    
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-      
-  <!-- Brand -->
- <!-- <a class="navbar-brand" href="home.html">Home</a> -->
-
-  <!-- Toggler/collapsibe Button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <!-- Navbar links-left -->
-  <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
-    <ul class="navbar-nav" id="barLeft">
-      <li class="nav-item mx-2">
-          <a class="nav-link" id="barLink" href="home.html">Home</a>
-      </li>
-      <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="booklist.html">Books</a>
-      </li>
-      <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="promotions.html">Promotions</a>
-      </li>
-    </ul>
-    
-    <!-- Navbar links-right -->
-	<script>
-		checkLoggedin();
+  <div id="navspace">
+	
+	</div>
+    <script>
+	$(function(){
+	$("#navspace").load("/navbar.html");
+	});
+	uniqueProfile();
 	</script>
-		
-		
-		<ul class="navbar-nav" id="barRight">
-        <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="register.html">Sign up</a>
-        </li>
-        <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="login.html">Login</a>
-        </li>       
-         
-        <!-- search bar -->      
-        <form class="form-inline mx-2" action="/action_page.php">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search Books">
-        <button class="btn btn-success" id="search" type="submit">Search</button>
-        </form>  
-    </ul>
-  </div> 
-</nav>
-    <!-- end of header content -->
   
     
     
@@ -130,7 +90,7 @@
 
   </div>
 </div>
-    
+    <script>console.log("logged in user id: " + getUID()) </script
 
 </body>
     

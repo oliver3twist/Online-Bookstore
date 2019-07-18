@@ -29,6 +29,7 @@
 		<script src="./scripts/logged_in_user_scripts.js"></script>
 		<script src="./scripts/logged_in_admin_scripts.js"></script>
 		<script>checkAdmin();</script>
+		<script>uniqueProfile();</script>
 </head>
     
     
@@ -79,7 +80,10 @@
             <img src="images/cart3.png" id="cartIcon" alt="Shopping Cart">
         </a>
     </li> 
-          
+    
+	<li class="nav-item mx-2">
+        <a class="nav-link" id="barLink" onclick="logout()" href="#">Log Out</a>
+    </li>
          
     <!-- search bar -->      
     <form class="form-inline mx-2" action="/action_page.php">

@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Borders Books</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="bookstore.css" />
-    <link rel="stylesheet" href="profile.css" />
+	<title>Borders Books</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" href="bookstore.css" />
+	<link rel="stylesheet" href="profile.css" />
 	<!--FIREBASE STUFF-->
-<!--Firebase App is always required and must be first-->
+	<!--Firebase App is always required and must be first-->
         <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
-        <script>
+	<script>
             // Initialize Firebase
             var config = {
                 apiKey: "AIzaSyCU3PKSSVSxi2h3jhbGtBvI--r7Wgpx0l8",
@@ -26,69 +26,28 @@
             };
             firebase.initializeApp(config);
         </script>
-		<script src="./scripts/logged_in_user_scripts.js"></script>
-</head>  
+
+        <script src="./scripts/logged_in_user_scripts.js"></script>
+		
+		
+</head>
+    
+    
 <body>
 
   <div class="jumbotron text-center heading" >
   <h1 id="title">Borders Books</h1>
   <p id="slogan">The premier online bookstore</p> 
   </div>
-    
-    
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-      
-  <!-- Brand -->
- <!-- <a class="navbar-brand" href="home.html">Home</a> -->
-
-  <!-- Toggler/collapsibe Button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
-      
-      <!-- Navbar links-left -->
-    <ul class="navbar-nav" id="barLeft">
-      <li class="nav-item mx-2">
-          <a class="nav-link" id="barLink" href="homeReg.html">Home</a>
-      </li>
-      <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="./booklist.html">Books</a>
-      </li>
-      <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="./promotions.html">Promotions</a>
-      </li>
-      
-    </ul>
-    
-    <!-- Navbar links-right -->
-      <ul class="navbar-nav" id="barRight"> 
-       <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink-profile" href="./profile.html"></a>
-		<script>uniqueProfile();</script>
-      </li> 
-          
-    <li class="nav-item mx-2">
-        <a class="nav-link px-0 py-0" href="./cart.html">
-            <img src="images/cart3.png" id="cartIcon" alt="Shopping Cart">
-        </a>
-    </li> 
-          
-         
-    <!-- search bar -->      
-    <form class="form-inline mx-2" action="/action_page.php">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search Books">
-        <button class="btn btn-success" id="search" type="submit">Search</button>
-    </form>
-    
-        
-    </ul>
-      
-  </div> 
-</nav>
-    <!-- end of header content -->
+	<div id="navspace">
+	
+	</div>
+    <script>
+	$(function(){
+	$("#navspace").load("/navbar.html");
+	});
+	uniqueProfile();
+	</script>
     
   
 <div class="container mt-3">
@@ -212,11 +171,12 @@
 <div class="row">    
         
     <div class="col profileBox">
-        <h4>Payment Information: </h4>
-        <p>Card Holder Name: Johnny Appleseed</p>
-        <p>Card Number: 6124-5546-3432-4324</p>
-        <p>Expiration Date: 06/26</p>
-        <p>CVV Code: 06/26</p>
+        <h4>Credit Card: </h4>
+        <p id="holder"></p>
+        <p id="number"></p>
+		<p id="exp"></p>
+		<p id="ccvdisplay"></p>
+		<script>uniqueProfileCard();</script>
             
             <!-- Button to Open the Modal -->
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal3">
@@ -239,22 +199,22 @@
         <div class="modal-body">
         <form action="/action_page.php">
         <div class="form-group my-3">
-        <input type="text" class="form-control" id="email" placeholder="Enter Card Holder Name" name="email">
+        <input type="text" id="cardholder" class="form-control" id="email" placeholder="Enter Card Holder Name" name="email">
         </div>
             
         <div class="form-group my-3">
-        <input type="text" class="form-control" id="email" placeholder="Enter Card Number" name="email">
+        <input type="text" id="cardnumber" class="form-control" id="email" placeholder="Enter Card Number" name="email">
         </div>
             
         <div class="form-group my-3">
-        <input type="text" class="form-control" id="email" placeholder="Enter Expiration Date (mm/yyyy)" name="email">
+        <input type="text" id="expdate" class="form-control" id="email" placeholder="Enter Expiration Date (mm/yyyy)" name="email">
         </div>
             
         <div class="form-group my-3">
-        <input type="text" class="form-control" id="email" placeholder="Enter CVV Code" name="email">
+        <input type="text" id="ccv" class="form-control" id="email" placeholder="Enter CVV Code" name="email">
         </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="button" class="btn btn-primary" id="register_btn" onclick="updateCreditCard()" value="Update">Update</button>
         </form>
         </div> 
         </div>

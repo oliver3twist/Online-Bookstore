@@ -51,6 +51,18 @@ hr {
 .loginrbtn:hover {
     opacity: 1;
 }
+
+.loginbtnafterreg {
+    background-color: #000000;
+    color: white;
+    padding: 20px 22px;
+    margin: 8px 0;
+    border: none;
+    width: 25%;
+    opacity: 0.9;
+    border-radius: 5px;
+}
+
 /* Add a blue text color to links */
 register {
     color: dodgerblue;

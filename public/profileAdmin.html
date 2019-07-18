@@ -8,7 +8,24 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+<!--FIREBASE STUFF-->
+<!--Firebase App is always required and must be first-->
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCU3PKSSVSxi2h3jhbGtBvI--r7Wgpx0l8",
+                authDomain: "bookstore-ef084.firebaseapp.com",
+                databaseURL: "https://bookstore-ef084.firebaseio.com",
+                projectId: "bookstore-ef084",
+                storageBucket: "gs://bookstore-ef084.appspot.com",
+                messagingSenderId: "540736543010"
+            };
+            firebase.initializeApp(config);
+        </script>
+		<script src="./scripts/logged_in_user_scripts.js"></script>
+		<script src="./scripts/logged_in_admin_scripts.js"></script>
+		<script>checkAdmin();</script>
     <link rel="stylesheet" href="bookstore.css" />
     <link rel="stylesheet" href="profile.css" />
 </head>  
@@ -36,13 +53,13 @@
       <!-- Navbar links-left -->
     <ul class="navbar-nav" id="barLeft">
       <li class="nav-item mx-2">
-          <a class="nav-link" id="barLink" href="homeReg.html">Home</a>
+          <a class="nav-link" id="barLink" href="homeAdmin.html">Home</a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="#">Books</a>
+        <a class="nav-link" id="barLink" href="bookList.html">Books</a>
       </li>
       <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="#">Promotions</a>
+        <a class="nav-link" id="barLink" href="promotionsAdmin">Promotions</a>
       </li>
       
     </ul>
@@ -66,7 +83,10 @@
         <button class="btn btn-success" id="search" type="submit">Search</button>
     </form>
     
-        
+    <li class="nav-item mx-2">
+        <a class="nav-link" id="barLink" onclick="logout()" href="#">Log Out</a>
+    </li>
+		
     </ul>
       
   </div> 

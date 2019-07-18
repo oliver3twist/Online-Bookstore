@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Borders Books</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="bookstore.css" />
-    <link rel="stylesheet" href="promotions.css"/>
+	<title>Borders Books</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" href="bookstore.css" />
+	<link rel="stylesheet" href="promotions.css" />
 	<!--FIREBASE STUFF-->
-<!--Firebase App is always required and must be first-->
+	<!--Firebase App is always required and must be first-->
         <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
 	<script>
             // Initialize Firebase
@@ -28,71 +28,26 @@
         </script>
 
         <script src="./scripts/logged_in_user_scripts.js"></script>
+		
+		
 </head>
     
     
 <body>
 
-
   <div class="jumbotron text-center heading" >
   <h1 id="title">Borders Books</h1>
   <p id="slogan">The premier online bookstore</p> 
   </div>
-    
-    
-   <!-- Navbar -->
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-      
-  <!-- Brand -->
- <!-- <a class="navbar-brand" href="home.html">Home</a> -->
-
-  <!-- Toggler/collapsibe Button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
-      
-      <!-- Navbar links-left -->
-    <ul class="navbar-nav" id="barLeft">
-      <li class="nav-item mx-2">
-          <a class="nav-link" id="barLink" href="homeReg.html">Home</a>
-      </li>
-      <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="./booklist.html">Books</a>
-      </li>
-      <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="./promotions.html">Promotions</a>
-      </li>
-      
-    </ul>
-    
-    <!-- Navbar links-right -->
-      <ul class="navbar-nav" id="barRight"> 
-       <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink-profile" href="./profile.html"></a>
-		<script>uniqueProfile();</script>
-      </li> 
-          
-    <li class="nav-item mx-2">
-        <a class="nav-link px-0 py-0" href="./cart.html">
-            <img src="images/cart3.png" id="cartIcon" alt="Shopping Cart">
-        </a>
-    </li> 
-          
-         
-    <!-- search bar -->      
-    <form class="form-inline mx-2" action="/action_page.php">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search Books">
-        <button class="btn btn-success" id="search" type="submit">Search</button>
-    </form>
-    
-        
-    </ul>
-      
-  </div> 
-</nav>
-    <!-- end of header content -->
+	<div id="navspace">
+	
+	</div>
+    <script>
+	$(function(){
+	$("#navspace").load("/navbar.html");
+	});
+	uniqueProfile();
+	</script>
     
     
     
