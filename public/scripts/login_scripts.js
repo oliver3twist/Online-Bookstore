@@ -24,8 +24,12 @@ function loginWithEmailAndPassword() {
         	    alert(errorMessage);
         	}
     	}
-    );
-	
+    ).then(function(){
+		
+	});
+	if(firebase.auth().currentUser.emailVerified==false){
+		alert("Please verfiy your email address to login");
+	}
 	firebase.auth().onAuthStateChanged(function(user){//state change with succesful log in.
 		if (user && user.emailVerified) {
 			
@@ -33,6 +37,8 @@ function loginWithEmailAndPassword() {
 			//console.log(user.uid);//test if user is logged in.
 		}
 		else{
+			console.log(error);
+			//alert("Please verfiy your email address to login");
 			// send to "looks like you need to verify email" page
 			//window.open("./homeReg.html", "_self");// for testing-PJ
 		}
