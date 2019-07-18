@@ -1,0 +1,140 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: grey;
+}  
+    
+.mycontainer {
+    margin-top: 80px;
+    max-width: 800px;
+    border: solid darkgray thin;
+    border-radius: 7px;
+    background-color: white;
+}
+.mycontainer2 {
+    margin-top: 35px;
+    margin-bottom: 20px;
+    max-width: 800px;
+    border: solid darkgray thin;
+    border-radius: 7px;
+    background-color: white;
+}
+
+/*Style for mandatory fields*/
+input[type=name], input[type=password], input[type=address], input[type=email], input[type=birthdate], input[type=username] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 10px  0;
+    border: none;
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+input[type=text]:focus, input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+/*Registration form style */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+/* Submit button */
+.loginbtn {
+    background-color: #000000;
+    color: white;
+    padding: 20px 22px;
+    margin: 8px 0;
+    border: none;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 5px;
+}
+.loginrbtn:hover {
+    opacity: 1;
+}
+/* Add a blue text color to links */
+register {
+    color: dodgerblue;
+}
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+    margin-bottom: 10px;
+    padding: 20px;
+    background-color: #f1f1f1;
+    text-align: center;
+    border-radius: 5px;
+}
+
+/*Registration form style */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 20px;
+}
+/* Submit button */
+.register_input_button {
+    background-color: #000000;
+    color: white;
+    padding: 20px 20px;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    border-radius: 5px;
+}
+.register_input_button:hover {
+    opacity: 1;
+}
+/*----------------------*/
+
+
+.optional {
+    font-size: 11pt;
+    font-style: italic;
+}
+
+/*
+.optionalField1 {
+    
+}
+.optionalField2 {
+    
+}
+.optionalField3 {
+    
+}
+*/
+
+.drop {
+    padding-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    border-bottom: solid #f1f1f1;
+    border-left: solid #f1f1f1;
+    border-right: solid #f1f1f1;
+    border-top: solid thin #f1f1f1;
+    border-radius: 7px;
+}
+.dropArrow {
+    height: 15px;
+    float: right;
+    margin-right: 15px;
+    margin-top: 4px;
+}
+.sameAddressCombo {
+    float: right;
+}
+.sameAddress {
+    float: left;
+    margin-right: 290px;
+    margin-left: 4px;
+    margin-top: 3px;
+}
+.sameBox {
+     margin-top: 5px;
+}
+.forgot {
+    margin-left: 7px
+}
+
