@@ -46,7 +46,10 @@
 	$(function(){
 	$("#navspace").load("/navbar.html");
 	});
-	uniqueProfile();
+	$( document ).ready(function() {
+		uniqueProfile();
+	});
+	//uniqueProfile();
 	</script>
   
     
@@ -90,9 +93,8 @@
 
   </div>
 </div>
-    <script>console.log("logged in user id: " + getUID()) </script
+    <script>//console.log("logged in user id: " + getUID()) </script
 
 </body>
-    
     
 </html>

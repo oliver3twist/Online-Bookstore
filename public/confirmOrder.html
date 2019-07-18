@@ -45,8 +45,12 @@
 	$(function(){
 	$("#navspace").load("/navbar.html");
 	});
-	uniqueProfile();
+	$( document ).ready(function() {
+		uniqueProfile();
+	});
+	//uniqueProfile();
 	</script>
+	
 <div class="container mt-3 messageBox">    
     <h3> This is where the order confirmation information will be displayed.</h3>
 </div>
