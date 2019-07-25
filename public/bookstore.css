@@ -1,6 +1,7 @@
 body {
     background-image: url("images/stucco2.png");
     background-color: beige;
+    
 }
 
 .heading {
@@ -36,14 +37,12 @@ body {
     margin-right: 2.5%;
 }
 
-li{
-	 list-style:none;
-}
 
 
 /*book list + checkout */
 .shoppingCartItemsContainer {
     height: 150px;
+    max-width: 800px;
     background-color: #f3efea;
     border-style: solid;
     overflow: hidden;
@@ -130,4 +129,41 @@ li{
     background-color: white;
     border: solid thin black;
 }
+.care {
+    margin-top: 5px;
+}
+
+li{
+	 list-style:none;
+}
+
+
+/*book details stuff*/
+
+.detailPic {
+    height: 400px;
+    max-width: 320px;
+}
+.right {
+   align-content: center;
+}
+.tab {
+    padding-left: 10px;
+}
+.tab2 {
+    font-style: italic;
+    padding-left: 10px;
+}
+.bold {
+    margin-top: 20px;
+    padding-top: 20px;
+}
+.detailBox {
+    background-color: #f3efea;
+    border: solid black;
+    border-radius: 7px;
+    max-width: 1000px;
+    text-align: left;
+}
+
 
