@@ -24,20 +24,16 @@ function loginWithEmailAndPassword() {
         	    alert(errorMessage);
         	}
     	}
-    ).then(function(){
-		
-	});
-	if(firebase.auth().currentUser.emailVerified==false){
-		alert("Please verfiy your email address to login");
-	}
+    );
+	
 	firebase.auth().onAuthStateChanged(function(user){//state change with succesful log in.
 		if (user && user.emailVerified) {
-			
-		  window.open("./homeReg.html", "_self");// for testing-PJ
+			checkAdmin();
+			//window.open("./homeReg.html", "_self");// for testing-PJ
 			//console.log(user.uid);//test if user is logged in.
 		}
 		else{
-			console.log(error);
+			console.log("error");
 			//alert("Please verfiy your email address to login");
 			// send to "looks like you need to verify email" page
 			//window.open("./homeReg.html", "_self");// for testing-PJ
@@ -47,3 +43,38 @@ function loginWithEmailAndPassword() {
 	
 	
 }//loginWithEmailAndPassword
+
+function checkAdmin(){
+	firebase.auth().onAuthStateChanged(function(user) {//checks if user is signed in.
+	  if (user) {//user is signed in.
+		var db = firebase.firestore();
+			var docRef = db.collection("users").doc(user.uid);
+
+			docRef.get().then(function(doc) {
+			if (doc.exists) {
+				if(doc.data().Admin==true){
+					window.open("./homeAdmin.html", "_self");
+				}
+				else{
+					window.open("./homeReg.html", "_self");
+				}
+				console.log("Document data:", doc.data());
+			} else {
+				window.open("./index.html", "_self");// refresh page
+				// doc.data() will be undefined in this case
+				console.log("No such document!");
+			}
+			}).catch(function(error) {
+				console.log("Error getting document:", error);
+			});
+		console.log("Logged in User uid:"+ user.uid);
+		return true;
+	  } else {
+		  window.open("./index.html", "_self");// refresh page
+		  console.log("User is not logged in");
+		  return false;
+		// No user is signed in.
+	  }
+	});
+	
+}

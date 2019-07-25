@@ -8,7 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <link rel="stylesheet" href="bookstore.css" />
     <link rel="stylesheet" href="profile.css" />
 </head>  
@@ -38,73 +38,29 @@
   </div>
     
     
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-      
-  <!-- Brand -->
- <!-- <a class="navbar-brand" href="home.html">Home</a> -->
-
-  <!-- Toggler/collapsibe Button -->
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavbar">
-      
-      <!-- Navbar links-left -->
-    <ul class="navbar-nav" id="barLeft">
-      <li class="nav-item mx-2">
-          <a class="nav-link" id="barLink" href="homeReg.html">Home</a>
-      </li>
-      <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="#">Books</a>
-      </li>
-      <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="#">Promotions</a>
-      </li>
-      
-    </ul>
-    
-    <!-- Navbar links-right -->
-      <ul class="navbar-nav" id="barRight"> 
-       <li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" href="#">Profile</a>
-      </li> 
-          
-    <li class="nav-item mx-2">
-        <a class="nav-link px-0 py-0" href="#">
-            <img src="images/cart3.png" id="cartIcon" alt="Shopping Cart">
-        </a>
-    </li> 
+  <div id="navspace">
 	
-	<li class="nav-item mx-2">
-        <a class="nav-link" id="barLink" onclick="logout()" href="#">Log Out</a>
-    </li>
-          
-         
-    <!-- search bar -->      
-    <form class="form-inline mx-2" action="/action_page.php">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search Books">
-        <button class="btn btn-success" id="search" type="submit">Search</button>
-    </form>
-    
-        
-    </ul>
-      
-  </div> 
-</nav>
-    <!-- end of header content -->
+	</div>
+    <script>
+	
+	$(function(){
+	$("#navspace").load("/adminnavbar.html");
+	});
+	$( document ).ready(function() {
+		uniqueProfile();//need a new function
+	});
+	//uniqueProfile();
+	</script>
     
 <div id="top" class="container mt-5 adminControls">
     <h2>Admin Controls</h2>
     <div class=row>
         <div class="col messageBox">
         <h5>Manage Available Books</h5>
-        <button type="button" class="btn btn-primary my-2 mx-5">Add Books</button>
+        
+        <button type="button" class="btn btn-primary my-2 mx-5" onclick="window.location.href ='./editbookAdmin.html';" id="adminBtn">Manage Books</button>
             
-        <button type="button" class="btn btn-primary my-2 mx-5" id=adminBtn>Delete Books</button>
-            
-        <button type="button" class="btn btn-primary my-2 mx-5" id=adminBtn>Update Book</button>
+        
         </div>
         
         <div class="col messageBox">

@@ -193,9 +193,45 @@ function updateBillingAddress(){
 }
 
 function promoteUser(userid){
-	console.log("user id promote: "+userid);
-	
-}
+	firebase.auth().onAuthStateChanged(function(user){
+		if (user) {
+			var db = firebase.firestore();
+			
+		db.collection("users").doc(userid).update({
+		Admin: true ,
+		})
+		.then(function() {
+			console.log("User successfully promoted!");
+			//successfully written to db, new send email verification
+		}).catch(function(error) {
+			console.error("Error writing document: ", error);
+		});//end add to db
+		
+			//console.log(user.uid);//test if user is logged in.
+		}//if(user)
+	});
+	//console.log("user id promote: "+userid);//for testing
+}//promote user
+function demoteUser(userid){
+	firebase.auth().onAuthStateChanged(function(user){
+		if (user) {
+			var db = firebase.firestore();
+			
+		db.collection("users").doc(userid).update({
+		Admin: false ,
+		})
+		.then(function() {
+			console.log("User successfully promoted!");
+			//successfully written to db, new send email verification
+		}).catch(function(error) {
+			console.error("Error writing document: ", error);
+		});//end add to db
+		
+			//console.log(user.uid);//test if user is logged in.
+		}//if(user)
+	});
+	//console.log("user id promote: "+userid);//for testing
+}//promote user
 
 function showAllUsers(){
 	
@@ -225,7 +261,7 @@ function showAllUsers(){
 		var promotetd=document.createElement("TD");
 		var btn = document.createElement("BUTTON");		// Create a <button> element
 		btn.innerHTML = "Promote";                   // Insert text
-		
+		btn.addEventListener("click", function(){promoteUser(doc.id)},false);
 		//var x='<button onclick="promoteUser('+doc.id+')">Promote</button>'
 		if(btn==null){
 			console.log("button is null");
@@ -237,8 +273,324 @@ function showAllUsers(){
 		
 		
         // doc.data() is never undefined for query doc snapshots
-        console.log(doc.id, " => ", doc.data());
+        //console.log(doc.id, " => ", doc.data());
     });
 });
+	
+}//showAllUsers
+
+function addBook(url){
+	
+		//console.log(url);
+		var isbn=document.getElementById("ISBN").value;
+		var db = firebase.firestore();
+		db.collection("books").doc(isbn).set({
+				Title: document.getElementById("booktitle").value,
+				Author: document.getElementById("author").value ,
+				Edition: document.getElementById("edition").value ,
+				ISBN: document.getElementById("ISBN").value ,
+				Cover:url,
+				BuyingPrice$: document.getElementById("buyingprice").value ,
+				SellingPrice$: document.getElementById("sellingprice").value ,
+				Stock: document.getElementById("stock").value ,
+				Condition: document.getElementById("condition").value,
+				status: true,//book active?
+			})
+			.then(function() {
+				onFileSelected(event);
+				window.open("./editbookAdmin.html", "_self");
+				console.log("Book Added!");
+				//successfully written to db
+				
+			})
+			.catch(function(error) {
+				console.error("Error writing document: ", error);
+			});
+		
+}//addbook
+
+
+function showAllBooksOriginal(){
+	//var book=document.getElementById("bookentry");
+	//var copy=book.cloneNode(true);
+	//copy.setAttribute("display", show);
+	//document.getElementById("booklist").appendChild(copy);
+	list=document.getElementById("booklist");
+	var db = firebase.firestore();
+	db.collection("books").get().then(function(querySnapshot) {
+		querySnapshot.forEach(function(doc) {
+			var book=document.getElementById("bookentry");
+			var copy=book.cloneNode(true);
+			copy.setAttribute("display", true);
+			document.getElementById("booktitle").innerHTML=doc.data().Title;
+			document.getElementById("condition").innerHTML=doc.data().Condition;
+			document.getElementById("sellingprice").innerHTML="<strong> $"+doc.data().SellingPrice$+"</strong> each";
+			document.getElementById("sellingprice2").innerHTML="Price: <strong> $"+doc.data().SellingPrice$+"</strong>";
+			if(doc.data().Cover!=null){
+				document.getElementById("coverpic").src=doc.data().Cover;
+				
+			}
+			else if(doc.data().Cover.length=0){
+				document.getElementById("coverpic").src="https://dummyimage.com/100x100/000/fff";
+			}
+			else{
+				document.getElementById("coverpic").src="https://dummyimage.com/100x100/000/fff";
+			}
+			
+			//copy.setAttribute("onclick",deleteBook(doc.data().ISBN));
+			list.appendChild(copy);
+			
+			// doc.data() is never undefined for query doc snapshots
+			//console.log(doc.id, " => ", doc.data());
+		});
+	});
+	
+	
+	
+	
+}//showAllUsers
+
+
+function showAllBooks(){
+	list=document.getElementById("booklist");
+	var db = firebase.firestore();
+	db.collection("books").get().then(function(querySnapshot) {
+		querySnapshot.forEach(function(doc) {
+			
+			var book=document.getElementById("booklist");
+			
+			var shoppingCartItemsContainer = document.createElement("DIV");
+			shoppingCartItemsContainer.className = "shoppingCartItemsContainer";
+			var br=document.createElement("br");
+			
+			var div1 = document.createElement("div");
+			div1.setAttribute("style", "width: 100px; height: 100px; float: left")
+			var a=document.createElement("a");
+			a.setAttribute("href","#");
+			var imgsrc=document.createElement("img");
+			imgsrc.src=doc.data().Cover;
+			imgsrc.setAttribute("alt", "placeholder");
+			imgsrc.setAttribute("style", "width: 100px; height: 100px; float: left");
+			a.appendChild(imgsrc);
+			div1.appendChild(a);
+			
+			var shoppingCartItemsDetails=document.createElement("div");
+			shoppingCartItemsDetails.className="shoppingCartItemsDetails";
+			var atitle=document.createElement("a");
+			atitle.setAttribute("href","#");
+			atitle.innerHTML=doc.data().Title;
+			var author=document.createElement("p");
+			author.innerHTML="By: <strong>"+doc.data().Author+"</strong>";
+			
+			var condition=document.createElement("p");
+			condition.innerHTML="Condition: <strong>"+doc.data().Condition+"</strong>";
+			
+			var sellpriceper=document.createElement("p");
+			sellpriceper.innerHTML="Selling Price: <strong>$"+doc.data().SellingPrice$+"</strong> each";
+			
+			var buypriceper=document.createElement("p");
+			buypriceper.innerHTML="Buying Price: <strong>$"+doc.data().BuyingPrice$+"</strong> each";
+			
+			shoppingCartItemsDetails.appendChild(atitle);
+			shoppingCartItemsDetails.appendChild(author);
+			shoppingCartItemsDetails.appendChild(condition);
+			shoppingCartItemsDetails.appendChild(sellpriceper);
+			shoppingCartItemsDetails.appendChild(buypriceper);
+			
+			var shoppingCartItemsQuantity=document.createElement("div");
+			shoppingCartItemsQuantity.setAttribute("style", "float:right");
+			var price=document.createElement("p");
+			price.innerHTML="Price: <strong>$"+doc.data().SellingPrice$+"</strong>";
+			var editbtn=document.createElement("button");
+			editbtn.addEventListener("click", function(){
+				var statement="./editbookform.html?ISBN="+doc.data().ISBN;
+				window.location.href=statement;
+				//window.open(statement, "_self");
+			},false);
+			//editbtn.addEventListener("click", function(){editBook(doc.data().ISBN)},false);
+			//setAttribute("onclick", editBook(doc.data().ISBN));
+			editbtn.innerHTML="Edit Book";
+			
+			//start of modal
+				
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//end of modal
+			var deletebtn=document.createElement("button");
+			deletebtn.addEventListener("click", function(){deleteBook(doc.data().ISBN)},false);
+			//setAttribute("onclick", deleteBook(doc.data().ISBN));
+			deletebtn.innerHTML="Delete Book";
+			var stock=document.createElement("p");
+			stock.innerHTML="Quantity on Hand: <strong>"+doc.data().Stock+"</strong>";
+			var active=document.createElement("p");
+			active.innerHTML="Active: <strong>"+doc.data().status+"</strong>";
+			var br=document.createElement("br");
+			shoppingCartItemsQuantity.appendChild(price);
+			shoppingCartItemsQuantity.appendChild(editbtn);
+			shoppingCartItemsQuantity.appendChild(br);
+			shoppingCartItemsQuantity.appendChild(deletebtn);
+			//shoppingCartItemsQuantity.appendChild(br);
+			shoppingCartItemsQuantity.appendChild(stock);
+			
+			shoppingCartItemsQuantity.appendChild(active);
+			
+			
+			shoppingCartItemsContainer.appendChild(div1);
+			shoppingCartItemsContainer.appendChild(shoppingCartItemsDetails);
+			shoppingCartItemsContainer.appendChild(shoppingCartItemsQuantity);
+			li=document.createElement("LI");
+			li.appendChild(shoppingCartItemsContainer);
+			book.appendChild(li);
+		});
+	});
+	/*
+	<div class="shoppingCartItemsContainer">
+            <div style="width: 100px; height: 100px; float: left">
+              <!--Book Image-->
+              <a href="#"><img src="https://dummyimage.com/100x100/000/fff" alt="placeholder"></a>
+            </div>
+            <div>
+              <!-- Details -->
+              <div class="shoppingCartItemsDetails">
+                <!-- Book Details -->
+                <a href="#">Book Title</a>
+                <p>By John Smith</p>
+                <p>Condition: <strong>Acceptable</strong></p>
+                <p>Format: <strong>Paperback</strong></p>
+                <p><strong>3.99</strong> each</p>
+              </div>
+              <div class="shoppingCartItemsQuantity" style="float: right">
+                <!-- Totals -->
+                <p>Price: <strong>$3.99</strong></p>
+                <a href="#">Add to Cart</a>
+              </div>
+            </div>
+        </div>
+	*/
+	
+}
+function onFileSelected(){
+	
+    //var selectedFile = event.target.files[0];
+	var selectedFile = document.getElementById("coverlocal").files[0];
+    if (selectedFile) {
+        //console.log(firebase.auth().currentUser)
+        var fileName = Date.now().toString(36) + Math.random().toString(36).substr(2,9);
+			//return new Promise(function(resolve,reject){
+			var storage = firebase.storage();
+			var storageRef = storage.ref();
+			var picImagesRef = storageRef.child('images/' + fileName);
+
+			var uploadTask = picImagesRef.put(selectedFile);
+
+			uploadTask.on('state_changed', function(snapshot)
+			{
+				// Observe state change events such as progress, pause, and resume
+				// Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+				var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				console.log('Upload is ' + progress + '% done');
+				switch (snapshot.state) {
+				  case firebase.storage.TaskState.PAUSED: // or 'paused'
+					console.log('Upload is paused');
+					break;
+				  case firebase.storage.TaskState.RUNNING: // or 'running'
+					console.log('Upload is running');
+					break;
+				}
+			  }, function(error) {
+					// Handle unsuccessful uploads
+			  }, function() {
+				  
+					uploadTask.snapshot.ref.getDownloadURL().then(function(url)
+					{
+						//document.getElementById("cover").innerHTML=url;
+						addBook(url);
+						
+					})
+			})
+		//});
+
+    }
+	
+}//onfileselect
+
+
+function deleteBook(ISBN){
+	var db = firebase.firestore();
+	db.collection("books").doc(ISBN).delete().then(function() {
+		
+		console.log("Document successfully deleted!");
+		window.open("./editbookAdmin.html", "_self");
+	}).catch(function(error) {
+		console.error("Error removing document: ", error);
+	});
+	
+}
+
+function fillForm(ISBN){
+	console.log(ISBN);
+	var db = firebase.firestore();
+	var docRef = db.collection("books").doc(ISBN);
+	console.log()
+	docRef.get().then(function(doc) {
+	if (doc.exists) {
+		console.log("Document data:", doc.data().Title);
+		document.getElementById("booktitle").value=doc.data().Title;
+		
+		
+		document.getElementById("author").value=doc.data().Author;
+		document.getElementById("edition").value=doc.data().Edition;
+		document.getElementById("ISBN").value=doc.data().ISBN;
+		document.getElementById("cover").value=doc.data().Cover;
+		document.getElementById("buyingprice").value=doc.data().BuyingPrice$;
+		document.getElementById("sellingprice").value=doc.data().SellingPrice$;
+		document.getElementById("stock").value=doc.data().Stock;
+		document.getElementById("condition").value=doc.data().Condition;
+		
+	} else {
+				// doc.data() will be undefined in this case
+		console.log("No such document!");
+	}
+	}).catch(function(error) {
+		console.log("Error getting document:", error);
+	});
+
+}
+
+function editBook(){
+	var db = firebase.firestore();
+		ISBN=document.getElementById("ISBN").value;
+		db.collection("books").doc(ISBN).update({
+		Title: document.getElementById("booktitle").value,
+		Author: document.getElementById("author").value ,
+		Edition: document.getElementById("edition").value ,
+		ISBN: document.getElementById("ISBN").value ,
+		Cover:document.getElementById("cover").value,//need to enhance this
+		BuyingPrice$: document.getElementById("buyingprice").value ,
+		SellingPrice$: document.getElementById("sellingprice").value ,
+		Stock: document.getElementById("stock").value ,
+		Condition: document.getElementById("condition").value,
+		status: true,//book active?
+		})
+		.then(function() {
+			console.log("Book successfully Updated!");
+			window.open("./editbookAdmin.html", "_self");
+			//successfully written to db, new send email verification
+		}).catch(function(error) {
+			console.error("Error writing document: ", error);
+		});//end add to db
+		
+			//console.log(user.uid);//test if user is logged in.
+		
+	
+	
 	
 }

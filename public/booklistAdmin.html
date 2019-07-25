@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Borders Books</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" href="bookstore.css" />
+	<!--FIREBASE STUFF-->
+	<!--Firebase App is always required and must be first-->
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+	<script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCU3PKSSVSxi2h3jhbGtBvI--r7Wgpx0l8",
+                authDomain: "bookstore-ef084.firebaseapp.com",
+                databaseURL: "https://bookstore-ef084.firebaseio.com",
+                projectId: "bookstore-ef084",
+                storageBucket: "gs://bookstore-ef084.appspot.com",
+                messagingSenderId: "540736543010"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+        <script src="./scripts/logged_in_user_scripts.js"></script>
+		<script src="./scripts/logged_in_admin_scripts.js"></script>
+		<script>checkAdmin();</script>
+		
+</head>
+    
+    
+<body>
+
+  <div class="jumbotron text-center heading" >
+  <h1 id="title">Borders Books</h1>
+  <p id="slogan">The premier online bookstore</p> 
+  </div>
+	<div id="navspace">
+	
+	</div>
+    <script>
+	
+	$(function(){
+	$("#navspace").load("/adminnavbar.html");
+	});
+	$( document ).ready(function() {
+		uniqueProfile();//need a new function
+	});
+	//uniqueProfile();
+	</script>
+  
+
+  <div id="cartTotalContainer" style="margin-top: 20px; margin-bottom: 20px">
+    <h2 style="text-align: center">Books For Sale</h2>
+  </div>
+
+  <div class="container">
+	
+    
+	<div class="shoppingCartItemsContainer" >
+            <div style="width: 100px; height: 100px; float: left">
+              <!--Book Image-->
+              <a href="#"><img src="https://dummyimage.com/100x100/000/fff" alt="placeholder"></a>
+            </div>
+            <div>
+              <!-- Details -->
+              <div class="shoppingCartItemsDetails">
+                <!-- Book Details -->
+                <a href="#">Book Title</a>
+                <p>By John Smith</p>
+                <p>Condition: <strong>Acceptable</strong></p>
+                <p>Format: <strong>Paperback</strong></p>
+                <p><strong>3.99</strong> each</p>
+              </div>
+              <div class="shoppingCartItemsQuantity" style="float: right">
+                <!-- Totals -->
+                <p>Price: <strong>$3.99</strong></p>
+                <a href="#">Add to Cart</a>
+              </div>
+            </div>
+    </div>
+
+        <div class="shoppingCartItemsContainer">
+            <div style="width: 100px; height: 100px; float: left">
+              <!--Book Image-->
+              <a href="#"><img src="https://dummyimage.com/100x100/000/fff" alt="placeholder"></a>
+            </div>
+            <div>
+              <!-- Details -->
+              <div class="shoppingCartItemsDetails">
+                <!-- Book Details -->
+                <a href="#">Book Title</a>
+                <p>By John Smith</p>
+                <p>Condition: <strong>Acceptable</strong></p>
+                <p>Format: <strong>Paperback</strong></p>
+                <p><strong>3.99</strong> each</p>
+              </div>
+              <div class="shoppingCartItemsQuantity" style="float: right">
+                <!-- Totals -->
+                <p>Price: <strong>$3.99</strong></p>
+                <a href="#">Add to Cart</a>
+              </div>
+            </div>
+        </div>
+
+        <div class="shoppingCartItemsContainer">
+            <div style="width: 100px; height: 100px; float: left">
+              <!--Book Image-->
+              <a href="#"><img src="https://dummyimage.com/100x100/000/fff" alt="placeholder"></a>
+            </div>
+            <div>
+              <!-- Details -->
+              <div class="shoppingCartItemsDetails">
+                <!-- Book Details -->
+                <a href="#">Book Title</a>
+                <p>By John Smith</p>
+                <p>Condition: <strong>Acceptable</strong></p>
+                <p>Format: <strong>Paperback</strong></p>
+                <p><strong>3.99</strong> each</p>
+              </div>
+              <div class="shoppingCartItemsQuantity" style="float: right">
+                <!-- Totals -->
+                <p>Price: <strong>$3.99</strong></p>
+                <a href="#">Add to Cart</a>
+              </div>
+            </div>
+        </div>
+
+        <div class="shoppingCartItemsContainer">
+            <div style="width: 100px; height: 100px; float: left">
+              <!--Book Image-->
+              <a href="#"><img src="https://dummyimage.com/100x100/000/fff" alt="placeholder"></a>
+            </div>
+            <div>
+              <!-- Details -->
+              <div class="shoppingCartItemsDetails">
+                <!-- Book Details -->
+                <a href="#">Book Title</a>
+                <p>By John Smith</p>
+                <p>Condition: <strong>Acceptable</strong></p>
+                <p>Format: <strong>Paperback</strong></p>
+                <p><strong>3.99</strong> each</p>
+              </div>
+              <div class="shoppingCartItemsQuantity" style="float: right">
+                <!-- Totals -->
+                <p>Price: <strong>$3.99</strong></p>
+                <a href="#">Add to Cart</a>
+              </div>
+            </div>
+        </div>
+
+        <div class="shoppingCartItemsContainer">
+            <div style="width: 100px; height: 100px; float: left">
+              <!--Book Image-->
+              <a href="#"><img src="https://dummyimage.com/100x100/000/fff" alt="placeholder"></a>
+            </div>
+            <div>
+              <!-- Details -->
+              <div class="shoppingCartItemsDetails">
+                <!-- Book Details -->
+                <a href="#">Book Title</a>
+                <p>By John Smith</p>
+                <p>Condition: <strong>Acceptable</strong></p>
+                <p>Format: <strong>Paperback</strong></p>
+                <p><strong>3.99</strong> each</p>
+              </div>
+              <div class="shoppingCartItemsQuantity" style="float: right">
+                <!-- Totals -->
+                <p>Price: <strong>$3.99</strong></p>
+                <a href="#">Add to Cart</a>
+              </div>
+            </div>
+        </div>
+
+  </div>
+
+</body>
+    
+    
+</html>

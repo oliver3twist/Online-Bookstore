@@ -244,9 +244,115 @@ function updateCreditCard(){
 
 function logout(){
 	firebase.auth().signOut().then(function() {
-		window.open("./index.html", "_self");//redirect to index page
+		window.open("./home.html", "_self");//redirect to index page
 		// Sign-out successful.
 	}).catch(function(error) {
 		// An error happened.
 	});
+}
+
+function showBooks(){
+	
+	list=document.getElementById("booklist");
+	var db = firebase.firestore();
+	db.collection("books").get().then(function(querySnapshot) {
+		querySnapshot.forEach(function(doc) {
+			
+			var book=document.getElementById("booklist");
+			
+			var shoppingCartItemsContainer = document.createElement("DIV");
+			shoppingCartItemsContainer.className = "shoppingCartItemsContainer";
+			var br=document.createElement("br");
+			
+			var div1 = document.createElement("div");
+			div1.setAttribute("style", "width: 100px; height: 100px; float: left")
+			var a=document.createElement("a");
+			a.setAttribute("href","#");
+			var imgsrc=document.createElement("img");
+			imgsrc.src=doc.data().Cover;
+			imgsrc.setAttribute("alt", "placeholder");
+			imgsrc.setAttribute("style", "width: 100px; height: 100px; float: left");
+			a.appendChild(imgsrc);
+			div1.appendChild(a);
+			
+			var shoppingCartItemsDetails=document.createElement("div");
+			shoppingCartItemsDetails.className="shoppingCartItemsDetails";
+			var atitle=document.createElement("a");
+			atitle.setAttribute("href","#");
+			atitle.innerHTML=doc.data().Title;
+			var author=document.createElement("p");
+			author.innerHTML="By: <strong>"+doc.data().Author+"</strong>";
+			
+			var condition=document.createElement("p");
+			condition.innerHTML="Condition: <strong>"+doc.data().Condition+"</strong>";
+			
+			var sellpriceper=document.createElement("p");
+			sellpriceper.innerHTML="Price: <strong>$"+doc.data().SellingPrice$+"</strong> each";
+			
+			var buypriceper=document.createElement("p");
+			buypriceper.innerHTML="Buying Price: <strong>$"+doc.data().BuyingPrice$+"</strong> each";
+			
+			shoppingCartItemsDetails.appendChild(atitle);
+			shoppingCartItemsDetails.appendChild(author);
+			shoppingCartItemsDetails.appendChild(condition);
+			shoppingCartItemsDetails.appendChild(sellpriceper);
+			
+			
+			var shoppingCartItemsQuantity=document.createElement("div");
+			shoppingCartItemsQuantity.setAttribute("style", "float:right");
+			var price=document.createElement("p");
+			price.innerHTML="Price: <strong>$"+doc.data().SellingPrice$+"</strong>";
+			var editbtn=document.createElement("button");
+			
+			var stock=document.createElement("p");
+			stock.innerHTML="Quantity in Stock: <strong>"+doc.data().Stock+"</strong>";
+			var active=document.createElement("p");
+			active.innerHTML="Active: <strong>"+doc.data().status+"</strong>";
+			var br=document.createElement("br");
+			var addtocart=document.createElement("a");
+			addtocart.setAttribute("href", "#");
+			addtocart.innerHTML="Add to Cart";
+			//shoppingCartItemsQuantity.appendChild(addtocart);
+			shoppingCartItemsQuantity.appendChild(price);
+			shoppingCartItemsQuantity.appendChild(addtocart);
+			//shoppingCartItemsQuantity.appendChild(br);
+			shoppingCartItemsQuantity.appendChild(stock);
+			
+			
+			
+			
+			shoppingCartItemsContainer.appendChild(div1);
+			shoppingCartItemsContainer.appendChild(shoppingCartItemsDetails);
+			shoppingCartItemsContainer.appendChild(shoppingCartItemsQuantity);
+			li=document.createElement("LI");
+			li.appendChild(shoppingCartItemsContainer);
+			book.appendChild(li);
+		});
+	});
+	/*
+	<div class="shoppingCartItemsContainer">
+            <div style="width: 100px; height: 100px; float: left">
+              <!--Book Image-->
+              <a href="#"><img src="https://dummyimage.com/100x100/000/fff" alt="placeholder"></a>
+            </div>
+            <div>
+              <!-- Details -->
+              <div class="shoppingCartItemsDetails">
+                <!-- Book Details -->
+                <a href="#">Book Title</a>
+                <p>By John Smith</p>
+                <p>Condition: <strong>Acceptable</strong></p>
+                <p>Format: <strong>Paperback</strong></p>
+                <p><strong>3.99</strong> each</p>
+              </div>
+              <div class="shoppingCartItemsQuantity" style="float: right">
+                <!-- Totals -->
+                <p>Price: <strong>$3.99</strong></p>
+                <a href="#">Add to Cart</a>
+              </div>
+            </div>
+        </div>
+	*/
+	
+	
 }
