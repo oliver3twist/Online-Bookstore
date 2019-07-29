@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Borders Books</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<!--FIREBASE STUFF-->
+<!--Firebase App is always required and must be first-->
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCU3PKSSVSxi2h3jhbGtBvI--r7Wgpx0l8",
+                authDomain: "bookstore-ef084.firebaseapp.com",
+                databaseURL: "https://bookstore-ef084.firebaseio.com",
+                projectId: "bookstore-ef084",
+                storageBucket: "gs://bookstore-ef084.appspot.com",
+                messagingSenderId: "540736543010"
+            };
+            firebase.initializeApp(config);
+        </script>
+		<script src="./scripts/logged_in_user_scripts.js"></script>
+		<script src="./scripts/logged_in_admin_scripts.js"></script>
+		<script>checkAdmin();</script>
+    <link rel="stylesheet" href="bookstore.css" />
+    <link rel="stylesheet" href="promotions.css"/>
+</head>
+    
+    
+<body>
+
+
+  <div class="jumbotron text-center heading" >
+  <h1 id="title">Borders Books</h1>
+  <p id="slogan">The premier online bookstore</p> 
+  </div>
+    
+    
+ <div id="navspace">
+	
+	</div>
+    <script>
+	
+	$(function(){
+	$("#navspace").load("/adminnavbar.html");
+	});
+	$( document ).ready(function() {
+		uniqueProfile();//need a new function
+		//showAllPromotions();
+	});
+	//uniqueProfile();
+	</script>
+    
+<div class="container">  
+    <h3 id="promTitle">Current Promotions </h3>
+    <div class="col-md-4 text-center">
+	<button type="button" text-align="center" class="btn btn-primary my-2 mx-5" data-toggle="modal" data-target="#myModal1">Add Promotion</button>
+     </div>       
+			<div class="modal" id="myModal1">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+  <div class="modal-header">
+        <h4 class="modal-title">Add Promotion</h4>    
+    
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+  <!-- Modal body -->
+        <div class="modal-body">
+        <form action="/action_page.php">
+        <div class="form-group my-1">
+        <form>
+			<div class="form-group my-1">
+				<!-- <label for="Number"><b>Number</b></label> -->
+				<input type="text" class="form-control" id="promocode" placeholder="Promo Code" name="promocode" required>
+			</div>
+			<div class="form-group my-1">
+				<!-- <label for="street"><b>Street</b></label> -->
+				<input type="text" class="form-control" id="promodesc" placeholder="Short Promo Description" name="promodesc" required>
+			</div>
+			<div class="form-group my-1">
+				<label for="datestart"><b>Start Date:</b></label>
+				<input type="date" class="form-control" id="datestart" placeholder="Start Date" name="datestart" required>
+			</div>
+			<div class="form-group my-1">
+				<label for="dateend"><b>End Date:</b></label>
+				<input type="date" class="form-control" id="dateend" placeholder="End Date" name="dateend" required>
+			</div>
+			<div class="form-group my-1">
+				<input id="specificISBN" type="checkbox"  value="">  Specific ISBN to Apply Promo
+			</div>
+			<div class="form-group my-1">
+				<!-- <label for="State"><b>State</b></label> -->
+				<input type="text" class="form-control" id="ISBN" placeholder="ISBN" name="ISBN">
+			</div>
+			<div class="form-group my-1">
+			<select class="form-control" id= "status" name="status" placeholder="Status">
+				<option value="true">Active</option>
+				<option value="false">Inactive</option>
+			</select>
+			</div>
+			<button type="button" class="btn btn-primary" id="register_btn" onclick="addPromotion()" value="Update">Add Promotion</button>
+		</form>
+        </div>
+
+        <button type="button" id="cancel" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+        </form>
+        </div> 
+        </div>
+        </div>
+		</div>
+	<ul class="promos">
+        
+    <li>
+        <div class="line"> 50% off Next Order: <span class="code">"Save76"</span>
+        </div>
+        <div class="sr">
+        <a class="send" href="#"> Send to Users </a>
+        <a class="remove" href="#"> Remove </a>
+        </div>
+    </li>
+    <li> 
+        <div class="line"> 50% off Next Order: <span class="code">"Save76"</span>
+        </div>
+        <div class="sr">
+        <a class="send" href="#"> Send to Users </a>
+        <a class="remove" href="#"> Remove </a>
+        </div>
+    </li>
+    <li> 
+       <div class="line"> 50% off Next Order: <span class="code">"Save76"</span>
+        </div>
+        <div class="sr">
+        <a class="send" href="#"> Send to Users </a>
+        <a class="remove" href="#"> Remove </a>
+        </div>
+    </li> 
+    <li>
+        <div class="line"> 50% off Next Order: <span class="code">"Save76"</span>
+        </div>
+        <div class="sr">
+        <a class="send" href="#"> Send to Users </a>
+        <a class="remove" href="#"> Remove </a>
+        </div>
+    </li>  
+    <div class="addCont">   
+        <button type="button" class="btn btn-primary" href="#">+ Add Promotion</button>
+    </div>
+        
+    </ul>
+    
+    
+    
+</div>  
+    
+    
+    
+    
+</body>
+    
+    
+</html>

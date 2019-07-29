@@ -10,11 +10,12 @@ const env = functions.config();
 import * as algoliasearch from 'algoliasearch';
 
 // Initialize the Algolia Client
-const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
-const index = client.initIndex('dev_book');
+//const client = algoliasearch(env.algolia.appid, env.algolia.apikey);
+//const index = client.initIndex('dev_book');
 
+/*
 exports.indexBooks = functions.firestore
-  .document('books/{bookId}')
+  .document('books/{bookID}')
   .onCreate((snap, context) => {
     const data = snap.data();
     const objectID = snap.id;
@@ -25,3 +26,4 @@ exports.indexBooks = functions.firestore
       ...data
     });
 });
+*/

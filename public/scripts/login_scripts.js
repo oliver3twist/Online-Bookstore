@@ -28,7 +28,8 @@ function loginWithEmailAndPassword() {
 	
 	firebase.auth().onAuthStateChanged(function(user){//state change with succesful log in.
 		if (user && user.emailVerified) {
-			checkAdmin();
+				checkAdmin();
+			
 			//window.open("./homeReg.html", "_self");// for testing-PJ
 			//console.log(user.uid);//test if user is logged in.
 		}
@@ -44,6 +45,39 @@ function loginWithEmailAndPassword() {
 	
 }//loginWithEmailAndPassword
 
+function checkSuspended(){
+	firebase.auth().onAuthStateChanged(function(user) {//checks if user is signed in.
+	  if (user) {//user is signed in.
+		var db = firebase.firestore();
+		var docRef = db.collection("users").doc(user.uid);
+		docRef.get().then(function(doc) {
+			if (doc.exists) {
+				if(doc.data().status==true){
+					return true;
+				}
+				else{
+					return false;
+				}
+				console.log("Document data:", doc.data());
+			} else {
+				//window.open("./index.html", "_self");// refresh page
+				// doc.data() will be undefined in this case
+				console.log("No such document!");
+			}
+			}).catch(function(error) {
+				console.log("Error getting document:", error);
+			});
+		
+	  } else {
+		  //window.open("./index.html", "_self");// refresh page
+		  console.log("User is not logged in");
+		  //return false;
+		// No user is signed in.
+	  }
+	});
+	
+}
+
 function checkAdmin(){
 	firebase.auth().onAuthStateChanged(function(user) {//checks if user is signed in.
 	  if (user) {//user is signed in.
@@ -52,11 +86,14 @@ function checkAdmin(){
 
 			docRef.get().then(function(doc) {
 			if (doc.exists) {
-				if(doc.data().Admin==true){
+				if(doc.data().Admin==true && doc.data().status==true){
 					window.open("./homeAdmin.html", "_self");
 				}
-				else{
+				else if(doc.data().Admin==false && doc.data().status==true){
 					window.open("./homeReg.html", "_self");
+				}
+				else if(doc.data().status==false){
+					window.open("./suspendedLogin.html", "_self");
 				}
 				console.log("Document data:", doc.data());
 			} else {

@@ -1,3 +1,36 @@
+function checkAdminBool(){
+	firebase.auth().onAuthStateChanged(function(user) {//checks if user is signed in.
+	  if (user) {//user is signed in.
+		var db = firebase.firestore();
+			var docRef = db.collection("users").doc(user.uid);
+
+			docRef.get().then(function(doc) {
+			if (doc.exists) {
+				if(doc.data().Admin==true){
+					//window.open("./homeReg.html", "_self");
+					return true;
+				}
+				console.log("Document data:", doc.data());
+			} else {
+				return false;//window.open("./index.html", "_self");// refresh page
+				// doc.data() will be undefined in this case
+				console.log("No such document!");
+			}
+			}).catch(function(error) {
+				console.log("Error getting document:", error);
+			});
+		console.log("Logged in User uid:"+ user.uid);
+		//return true;
+	  } else {
+		  //window.open("./index.html", "_self");// refresh page
+		  console.log("User is not logged in");
+		  return false;
+		// No user is signed in.
+	  }
+	});
+	return false
+}
+
 function checkLoggedin(){
 	firebase.auth().onAuthStateChanged(function(user) {//checks if user is signed in.
 	  if (user) {//user is signed in.
@@ -251,6 +284,34 @@ function logout(){
 	});
 }
 
+function bookDetails(ISBN){
+	var db = firebase.firestore();
+	var docRef = db.collection("books").doc(ISBN);
+
+			docRef.get().then(function(doc) {
+			if (doc.exists) {
+				//console.log("Document data:", doc.data());
+				
+					document.getElementById("booktitle").innerHTML="Title: "+doc.data().Title;
+					document.getElementById("author").innerHTML="Author: "+doc.data().Author;
+					document.getElementById("publisher").innerHTML="Publisher: "+doc.data().Publisher;
+					document.getElementById("category").innerHTML="Category: "+doc.data().Category;
+					document.getElementById("cover").setAttribute("src",doc.data().Cover);
+					
+					document.getElementById("ISBN").innerHTML="ISBN: "+doc.data().ISBN;
+				
+			} else {
+				// doc.data() will be undefined in this case
+				console.log("No such document!");
+			}
+			}).catch(function(error) {
+				console.log("Error getting document:", error);
+			});
+			//console.log(user.uid);
+		
+			//console.log(user.uid);//test if user is logged in.
+}//bookdetails
+
 function showBooks(){
 	
 	list=document.getElementById("booklist");
@@ -267,7 +328,11 @@ function showBooks(){
 			var div1 = document.createElement("div");
 			div1.setAttribute("style", "width: 100px; height: 100px; float: left")
 			var a=document.createElement("a");
-			a.setAttribute("href","#");
+			a.addEventListener("click", function(){
+				var statement="./bookdetails.html?ISBN="+doc.data().ISBN;
+				window.location.href=statement;
+				//window.open(statement, "_self");
+			},false);
 			var imgsrc=document.createElement("img");
 			imgsrc.src=doc.data().Cover;
 			imgsrc.setAttribute("alt", "placeholder");
@@ -278,7 +343,9 @@ function showBooks(){
 			var shoppingCartItemsDetails=document.createElement("div");
 			shoppingCartItemsDetails.className="shoppingCartItemsDetails";
 			var atitle=document.createElement("a");
-			atitle.setAttribute("href","#");
+			var statement="./bookdetails.html?ISBN="+doc.data().ISBN;
+				
+			atitle.setAttribute("href","window.location.href=statement");
 			atitle.innerHTML=doc.data().Title;
 			var author=document.createElement("p");
 			author.innerHTML="By: <strong>"+doc.data().Author+"</strong>";

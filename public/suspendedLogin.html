@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Borders Books</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" href="bookstore.css" />
+	<!--FIREBASE STUFF-->
+	<!--Firebase App is always required and must be first-->
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+	<script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCU3PKSSVSxi2h3jhbGtBvI--r7Wgpx0l8",
+                authDomain: "bookstore-ef084.firebaseapp.com",
+                databaseURL: "https://bookstore-ef084.firebaseio.com",
+                projectId: "bookstore-ef084",
+                storageBucket: "gs://bookstore-ef084.appspot.com",
+                messagingSenderId: "540736543010"
+            };
+            firebase.initializeApp(config);
+        </script>
+
+        <script src="./scripts/logged_in_user_scripts.js"></script>
+		
+		
+</head>
+    
+    
+<body>
+
+  <div class="jumbotron text-center heading" >
+  <h1 id="title">Borders Books</h1>
+  <p id="slogan">The premier online bookstore</p> 
+  </div>
+	<div id="navspace">
+	
+	</div>
+    <script>
+	$(function(){
+	$("#navspace").load("/navbar.html");
+	});
+	$( document ).ready(function() {
+		uniqueProfile();
+	});
+	//uniqueProfile();
+	</script>
+ 
+<div class="container mt-3 messageBox">
+    <h3> Your account is suspended or inactive.
+	<br> Please contact the system administrator before attempting to log in again.
+	<br> Contact us at someemail@host.com!
+	</h3>
+	<br>
+	<form action ="login.html">
+	<button type="submit" class="loginbtnafterreg" id="login_btn" value="Login">Proceed to Log In</button>
+	<form>
+	<p> or continue browsing as a guest in the meantime. </p>
+</div>
+    
+</body>
+    
+    
+</html>

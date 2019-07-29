@@ -42,14 +42,33 @@
 	
 	</div>
     <script>
+	if(checkLoggedin()&&checkAdminBool()){
+		$(function(){
+		$("#navspace").load("/adminnavbar.html");
+		});
+		$( document ).ready(function() {
+		checkAdmin();
+			uniqueProfile();
+			var ISBN = decodeURIComponent(window.location.search);
+			ISBN = ISBN.substring(1).split("=")[1];
+			//console.log(ISBN);
+			bookDetails(ISBN);
+		});
+	}
+	else{
+		$(function(){
+			$("#navspace").load("/navbar.html");
+			});
+			$( document ).ready(function() {
+				uniqueProfile();
+				var ISBN = decodeURIComponent(window.location.search);
+				ISBN = ISBN.substring(1).split("=")[1];
+				//console.log(ISBN);
+				bookDetails(ISBN);
+			});
+	}
 	
-	$(function(){
-	$("#navspace").load("/navbar.html");
-	});
-	$( document ).ready(function() {
-		uniqueProfile();
-		//bookdetails();
-	});
+	
 	//uniqueProfile();
 	</script>
   
@@ -58,23 +77,23 @@
         <h1 id="slideHeader"> Book Details </h1>
     <div class="row py-3 detailBox">
         <div class="col-md-6">
-        <img class="detailPic" src="https://dummyimage.com/400x500/000/fff" alt="placeholder">
+        <img id="cover" class="detailPic" src="https://dummyimage.com/400x500/000/fff" alt="placeholder">
         </div>
         
         <div class="col-md-6 right">
-            <h5 class="bold">Title: <span id="book_title" class="tab2"> Dummy Title </span> 
+            <h5 id="booktitle"class="bold">Title: <span id="book_title" class="tab2"> Dummy Title </span> 
             </h5>
             
-             <h5 class="bold">Author <span id="book_author" class="tab"> Dummy Author </span> 
+             <h5 id="author" class="bold">Author <span id="book_author" class="tab"> Dummy Author </span> 
             </h5>
             
-             <h5 class="bold">Publisher: <span id="book_publisher" class="tab"> Dummy Publisher </span> 
+             <h5 id="publisher"class="bold">Publisher: <span id="book_publisher" class="tab"> Dummy Publisher </span> 
             </h5>
             
-             <h5 class="bold">Category: <span id="book_category" class="tab"> Dummy Category </span> 
+             <h5 id="category" class="bold">Category: <span id="book_category" class="tab"> Dummy Category </span> 
             </h5>
             
-             <h5 class="bold">ISBN: <span id="book_isbn" class="tab"> Dummy ISBN </span> 
+             <h5  id="ISBN"class="bold">ISBN: <span id="book_isbn" class="tab"> Dummy ISBN </span> 
             </h5>
             
         </div>
