@@ -112,6 +112,10 @@ function checkAdmin(){
 		  return false;
 		// No user is signed in.
 	  }
-	});
+	});	
+}
+
+function resetPassword(){
+	
 	
 }

@@ -51,7 +51,7 @@
 	});
 	$( document ).ready(function() {
 		uniqueProfile();//need a new function
-		//showAllPromotions();
+		showAllPromotions();
 	});
 	//uniqueProfile();
 	</script>
@@ -81,6 +81,10 @@
 			<div class="form-group my-1">
 				<!-- <label for="street"><b>Street</b></label> -->
 				<input type="text" class="form-control" id="promodesc" placeholder="Short Promo Description" name="promodesc" required>
+			</div>
+			<div class="form-group my-1">
+				<label for="Discount(Decimal)"><b>Discount(Decimal):</b></label>
+				<input type="number" class="form-control" id="discount" placeholder="0.00" name="discount" required>
 			</div>
 			<div class="form-group my-1">
 				<label for="datestart"><b>Start Date:</b></label>
@@ -147,10 +151,7 @@
         <a class="remove" href="#"> Remove </a>
         </div>
     </li>  
-    <div class="addCont">   
-        <button type="button" class="btn btn-primary" href="#">+ Add Promotion</button>
-    </div>
-        
+	
     </ul>
     
     

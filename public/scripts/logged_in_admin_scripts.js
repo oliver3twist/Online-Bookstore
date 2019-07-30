@@ -325,28 +325,7 @@ function showAllUsers(){
 			var br=document.createElement("br");
 			
 			var div1 = document.createElement("div");
-			div1.setAttribute("style", "width: 100px; height: 100px; float: left")
-			/*
-			var a=document.createElement("a");
-			a.setAttribute("href","#");
-			a.addEventListener("click", function(){
-				var statement="./bookdetails.html?ISBN="+doc.data().ISBN;
-				window.location.href=statement;
-				//window.open(statement, "_self");
-			},false);
-			var imgsrc=document.createElement("img");
-			imgsrc.src=doc.data().Cover;
-			imgsrc.addEventListener("click", function(){
-				var statement="./bookdetails.html?ISBN="+doc.data().ISBN;
-				window.location.href=statement;
-				//window.open(statement, "_self");
-			},false);
-			//imgsrc.setAttribute("href", )
-			imgsrc.setAttribute("alt", "placeholder");
-			imgsrc.setAttribute("style", "width: 100px; height: 100px; float: left");
-			a.appendChild(imgsrc);
-			*/
-			//div1.appendChild(a);
+			div1.setAttribute("style", "width: 100px; height: 100px; float: left");
 			
 			var shoppingCartItemsDetails=document.createElement("div");
 			shoppingCartItemsDetails.className="shoppingCartItemsDetails";
@@ -360,35 +339,12 @@ function showAllUsers(){
 			condition.innerHTML="Condition: <strong>"+doc.data().Condition+"</strong>";
 			
 			var sellpriceper=document.createElement("p");
-			//sellpriceper.innerHTML="Selling Price: <strong>$"+doc.data().SellingPrice$+"</strong> each";
-			
 			var buypriceper=document.createElement("p");
-			//buypriceper.innerHTML="Buying Price: <strong>$"+doc.data().BuyingPrice$+"</strong> each";
-			
-			//shoppingCartItemsDetails.appendChild(atitle);
 			shoppingCartItemsDetails.appendChild(name);
-			//shoppingCartItemsDetails.appendChild(condition);
-			//shoppingCartItemsDetails.appendChild(sellpriceper);
-			//shoppingCartItemsDetails.appendChild(buypriceper);
 			
 			var shoppingCartItemsQuantity=document.createElement("div");
 			shoppingCartItemsQuantity.setAttribute("style", "float:right");
-			//var price=document.createElement("p");
-			//price.innerHTML="Price: <strong>$"+doc.data().SellingPrice$+"</strong>";
-			/*
-			var editbtn=document.createElement("button");
-			editbtn.addEventListener("click", function(){
-				var statement="./editbookform.html?ISBN="+doc.data().ISBN;
-				window.location.href=statement;
-				//window.open(statement, "_self");
-			},false);
-			//editbtn.addEventListener("click", function(){editBook(doc.data().ISBN)},false);
-			//setAttribute("onclick", editBook(doc.data().ISBN));
-			editbtn.innerHTML="Edit Book";
-			*/
-			//start of modal
 			
-			//end of modal
 			if(doc.data().Admin==true){
 				var promotebtn=document.createElement("button");
 				promotebtn.addEventListener("click", function(){demoteUser(doc.id)},false);
@@ -411,17 +367,8 @@ function showAllUsers(){
 			else{
 				var deletebtn=document.createElement("button");
 				deletebtn.addEventListener("click", function(){unsuspendUser(doc.id)},false);
-				//setAttribute("onclick", deleteBook(doc.data().ISBN));
 				deletebtn.innerHTML="Unsuspend User";
 			}
-			/*
-			var deletebtn=document.createElement("button");
-			deletebtn.addEventListener("click", function(){deleteBook(doc.data().ISBN)},false);
-			//setAttribute("onclick", deleteBook(doc.data().ISBN));
-			deletebtn.innerHTML="Delete Book";
-			*/
-			//var stock=document.createElement("p");
-			//stock.innerHTML="Quantity on Hand: <strong>"+doc.data().Stock+"</strong>";
 			var active=document.createElement("p");
 			active.innerHTML="Suspended: <strong>"+!doc.data().status+"</strong>";
 			var admin=document.createElement("p");
@@ -461,8 +408,8 @@ function addBook(url){
 				Edition: document.getElementById("edition").value ,
 				ISBN: document.getElementById("ISBN").value ,
 				Cover:url,
-				BuyingPrice$: document.getElementById("buyingprice").value ,
-				SellingPrice$: document.getElementById("sellingprice").value ,
+				BuyingPrice$: (document.getElementById("buyingprice").value / 1).toFixed(2) ,
+				SellingPrice$: (document.getElementById("sellingprice").value/ 1).toFixed(2) ,
 				Stock: document.getElementById("stock").value ,
 				Condition: document.getElementById("condition").value,
 				Publisher: document.getElementById("publisher").value ,
@@ -484,7 +431,7 @@ function addBook(url){
 
 function addPromotion(){
 		//console.log(url);
-		promocode=document.getElementById("promocode").value
+		promocode=document.getElementById("promocode").value;
 		if(document.getElementById("specificISBN").checked==true){
 			var isbn=document.getElementById("ISBN").value;
 		}
@@ -496,6 +443,7 @@ function addPromotion(){
 		db.collection("promotions").doc(promocode).set({
 				PromoCode: promocode,
 				PromoDesc: document.getElementById("promodesc").value ,
+				PromoDiscount: document.getElementById("discount").value ,
 				StartDate: firebase.firestore.Timestamp.fromDate(new Date(document.getElementById("datestart").value)),
 				//StartDate: document.getElementById("datestart").value ,
 				//EndDate: document.getElementById("dateend").value ,
@@ -513,6 +461,56 @@ function addPromotion(){
 			.catch(function(error) {
 				console.error("Error writing document: ", error);
 			});
+}//addpromo
+
+function editPromotion(promocodeorg){
+		//console.log(url);
+		promocode=document.getElementById("promocode").value;
+		if(document.getElementById("specificISBN").checked==true){
+			var isbn=document.getElementById("ISBN").value;
+		}
+		else{
+			var isbn=null;
+		}
+		
+		var db = firebase.firestore();
+		db.collection("promotions").doc(promocode).set({
+				PromoCode: promocode,
+				PromoDesc: document.getElementById("promodesc").value ,
+				PromoDiscount: document.getElementById("discount").value ,
+				StartDate: firebase.firestore.Timestamp.fromDate(new Date(document.getElementById("datestart").value)),
+				//StartDate: document.getElementById("datestart").value ,
+				//EndDate: document.getElementById("dateend").value ,
+				EndDate: firebase.firestore.Timestamp.fromDate(new Date(document.getElementById("dateend").value)),
+				Active: document.getElementById("status").value ,
+				ISBN: isbn ,
+				SentToUsers: false,
+			})
+			.then(function() {
+				//console.log("time"+ firebase.firestore.Timestamp.fromDate(new Date(document.getElementById("datestart").value)));
+				if(promocodeorg!=promocode){
+					console.log("promoCodeOrg: "+ promocodeorg);
+					console.log("promoCode: "+ promocode);
+					var db = firebase.firestore();
+					var docRef = db.collection("promotions").doc(promocodeorg);
+					docRef.get().then(function(doc) {
+							db.collection("promotions").doc(promocodeorg).delete().then(function() {
+							console.log("Document successfully deleted!");
+							
+							//window.open("./editpromotionsAdmin.html", "_self");
+							}).catch(function(error) {
+								console.error("Error removing document: ", error);
+							});
+					});
+				}//if
+				window.alert("Promotion Updated.");
+				window.open("./editpromotionsAdmin.html", "_self");
+				console.log("Promo Added!");
+				//successfully written to db
+			}).catch(function(error) {
+				console.error("Error writing document: ", error);
+			});
+			
 }//addbook
 
 function showAllBooksOriginal(){
@@ -657,32 +655,8 @@ function showAllBooks(){
 			book.appendChild(li);
 		});
 	});
-	/*
-	<div class="shoppingCartItemsContainer">
-            <div style="width: 100px; height: 100px; float: left">
-              <!--Book Image-->
-              <a href="#"><img src="https://dummyimage.com/100x100/000/fff" alt="placeholder"></a>
-            </div>
-            <div>
-              <!-- Details -->
-              <div class="shoppingCartItemsDetails">
-                <!-- Book Details -->
-                <a href="#">Book Title</a>
-                <p>By John Smith</p>
-                <p>Condition: <strong>Acceptable</strong></p>
-                <p>Format: <strong>Paperback</strong></p>
-                <p><strong>3.99</strong> each</p>
-              </div>
-              <div class="shoppingCartItemsQuantity" style="float: right">
-                <!-- Totals -->
-                <p>Price: <strong>$3.99</strong></p>
-                <a href="#">Add to Cart</a>
-              </div>
-            </div>
-        </div>
-	*/
-	
 }
+
 function onFileSelected(){
 	
     //var selectedFile = event.target.files[0];
@@ -722,10 +696,7 @@ function onFileSelected(){
 						
 					})
 			})
-		//});
-
     }
-	
 }//onfileselect
 
 
@@ -745,7 +716,6 @@ function fillForm(ISBN){
 	console.log(ISBN);
 	var db = firebase.firestore();
 	var docRef = db.collection("books").doc(ISBN);
-	console.log()
 	docRef.get().then(function(doc) {
 	if (doc.exists) {
 		console.log("Document data:", doc.data().Title);
@@ -799,8 +769,184 @@ function editBook(){
 		});//end add to db
 		
 			//console.log(user.uid);//test if user is logged in.
-		
-	
-	
+}//editBook
+
+function showAllPromotions(){
+	promo=document.getElementsByClassName("promos");
+	var db = firebase.firestore();
+	db.collection("promotions").get().then(function(querySnapshot) {
+		querySnapshot.forEach(function(doc) {
+			var active;//=document.createElement("p");
+			//active.setAttribute("style","font-size: 15pt");
+			var sentstatus;//=document.createElement("p");
+			//sentstatus.setAttribute("style","font-size: 15pt");
+			var discount=doc.data().PromoDiscount;
+			if(doc.data().Active=="true"||doc.data().Active=="true"){
+				//active.innerHTML="Active Status: Active";
+				active="Active Status: Active"
+			}
+			else{
+				//active.innerHTML="Active Status: Inactive";
+				active="Active Status: Inactive";
+			}
+			
+			if(doc.data().SentToUsers==true||doc.data().SentToUsers=="true"){
+				//sentstatus.innerHTML="Sent to Users";
+				sentstatus="Sent to Users";
+			}
+			else{
+				//sentstatus.innerHTML="Not Sent to Users";
+				sentstatus="Not Sent to Users";
+			}
+			
+			var promoItemsContainer = document.createElement("DIV");
+			promoItemsContainer.setAttribute("class", "line");
+			var promodesc=doc.data().PromoDesc;
+			var promocode="\""+doc.data().PromoCode+"\"";
+			promoItemsContainer.innerHTML=promodesc +"<span class=\"code\">" + promocode+"</span>";
+			
+			var promoDetails = document.createElement("DIV");
+			promoDetails.setAttribute("class", "line");
+			var br=document.createElement("br");
+			var stats=document.createElement("p");
+			stats.innerHTML=active+"<br>"+sentstatus+"<br> Discount: "+discount;
+			
+			//promoDetails.appendChild(active);
+			//promoDetails.appendChild(br);
+			//promoDetails.appendChild(sentstatus);
+			promoDetails.appendChild(stats);
+			
+			var sr=document.createElement("DIV");
+			sr.setAttribute("class", "sr");
+			var sendToUsers=document.createElement("button");
+			sendToUsers.setAttribute("class", "btn btn-primary my-2 mx-5");
+			//sendToUsers.setAttribute("class", "send");
+			sendToUsers.innerHTML="Send To Users";
+			sendToUsers.addEventListener("click", function(){
+				sendPromo(doc.data().PromoCode);
+				//window.open(statement, "_self");
+			},false);
+			
+			var remove=document.createElement("button");
+			remove.setAttribute("class", "btn btn-primary my-2 mx-5");
+			//remove.setAttribute("class", "remove");
+			remove.innerHTML="Remove";
+			remove.addEventListener("click", function(){
+				removePromotion(doc.data().PromoCode);
+				//window.open(statement, "_self");
+			},false);
+			var editbtn=document.createElement("button");
+			editbtn.setAttribute("class", "btn btn-primary my-2 mx-5");
+			editbtn.addEventListener("click", function(){
+				var statement="./editpromoform.html?promocode="+doc.id;
+				window.location.href=statement;
+				//window.open(statement, "_self");
+			},false);
+			editbtn.innerHTML="Edit Promotion"
+			sr.appendChild(sendToUsers);
+			sr.appendChild(remove);
+			if(doc.data().SentToUsers==false||doc.data().SentToUsers=="false"){
+				sr.appendChild(editbtn);
+			}
+			
+			li=document.createElement("LI");
+			li.appendChild(promoItemsContainer);
+			li.appendChild(promoDetails);
+			li.appendChild(sr);
+			
+			promo[0].appendChild(li);
+			
+			
+		});
+	});
+}//showPromotions
+
+function sendPromo(promocode){
 	
 }
+
+function removePromotion(promocode){
+	promo=document.getElementsByClassName("promos");
+	var db = firebase.firestore();
+	var docRef = db.collection("promotions").doc(promocode);
+	docRef.get().then(function(doc) {
+			if(doc.data().SentToUsers==false){
+				db.collection("promotions").doc(promocode).delete().then(function() {
+				//console.log("Document successfully deleted!");
+				window.alert("Promotion deleted.");
+				window.open("./editpromotionsAdmin.html", "_self");
+			}).catch(function(error) {
+				console.error("Error removing document: ", error);
+			});
+			}else{
+				window.alert("Promotion already sent to users. Unable to delete.");
+				window.open("./editpromotionsAdmin.html", "_self");
+			}
+	});
+}//removePromotion
+
+function showPromotions(){
+	promo=document.getElementsByClassName("promos");
+	var db = firebase.firestore();
+	db.collection("promotions").get().then(function(querySnapshot) {
+		querySnapshot.forEach(function(doc) {
+			var promoItemsContainer = document.createElement("DIV");
+			var promodesc=doc.data().PromoDesc;
+			var promocode="\""+doc.data().PromoCode+"\"";
+			promoItemsContainer.innerHTML=promodesc +"<span class=\"code\">" + promocode+"</span>";
+			sendbtn=document.createElement("button");
+			sendbtn.setAttribute("id", "btn btn-primary");
+			sendbtn.innerHTML="Send to Users";
+			li=document.createElement("LI");
+			li.appendChild(promoItemsContainer);
+			promo[0].appendChild(li);
+			
+			
+		});
+	});
+}//showPromotions
+
+
+function fillPromoForm(promocode){
+	console.log(promocode);
+	var db = firebase.firestore();
+	var docRef = db.collection("promotions").doc(promocode);
+	docRef.get().then(function(doc) {
+	if (doc.exists) {
+		document.getElementById("promocode").value=doc.data().PromoCode;
+		document.getElementById("promodesc").value=doc.data().PromoDesc;
+		document.getElementById("discount").value=doc.data().PromoDiscount;
+		document.getElementById("datestart").value=doc.data().StartDate;
+		document.getElementById("dateend").value=doc.data().EndDate;
+		
+		if(doc.data().ISBN!=null){
+			document.getElementById("specificISBN").checked=true;
+			document.getElementById("ISBN").value=doc.data().ISBN;
+		}
+		document.getElementById("status").value=doc.data().Active;
+	} else {
+		// doc.data() will be undefined in this case
+		console.log("No such document!");
+	}
+	}).catch(function(error) {
+		console.log("Error getting document:", error);
+	});
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

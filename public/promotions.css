@@ -5,7 +5,7 @@
     margin-bottom: 16px;
 }
 .promos li {
-     text-align: center;
+    text-align: center;
     padding-top: 10px;
     padding-bottom: 10px;
     font-size: 21pt;
@@ -14,6 +14,11 @@
     border-radius: 7px;
     background-color: white;
 }
+
+p{
+	font-size: 15pt;
+}
+
 .line {
     border-bottom: solid thin;
 }

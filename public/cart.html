@@ -47,99 +47,23 @@
 	});
 	$( document ).ready(function() {
 		uniqueProfile();
+		showCart();
 	});
 	//uniqueProfile();
 	</script>
 
   <div id="cartTotalContainer" style="margin-top: 20px; margin-bottom: 20px">
-    <h2>Cart subtotal (3 items): $11.97 (USD)</h2>
+    <h2 id="cart total"></h2>
   </div>
-
+	
   <!-- Book Checkout List -->
   <div id="mainCheckoutContainer">
     <div class="row">
       <div class="col-md-7">
 
-        <div class="shoppingCartItemsContainer">
-            <div style="width: 100px; height: 100px; float: left">
-              <!--Book Image-->
-              <a href="#"><img src="https://dummyimage.com/100x100/000/fff" alt="placeholder"></a>
-            </div>
-            <div>
-              <!-- Details -->
-              <div class="shoppingCartItemsDetails">
-                <!-- Book Details -->
-                <a href="bookdetails.html">Book Title</a>
-                <p>By John Smith</p>
-                <p>Condition: <strong>Acceptable</strong></p>
-                <p>Format: <strong>Paperback</strong></p>
-                <p><strong>3.99</strong> each</p>
-              </div>
-              <div class="shoppingCartItemsQuantity">
-                <!-- Totals -->
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                </select>
-                <p>Subtotal: <strong>$3.99</strong></p>
-                <a href="#">Remove</a>
-              </div>
-            </div>
-        </div>
+        
 
-        <div class="shoppingCartItemsContainer">
-            <div style="width: 100px; height: 100px; float: left">
-              <!--Book Image-->
-              <a href="#"><img src="https://dummyimage.com/100x100/000/fff" alt="placeholder"></a>
-            </div>
-            <div>
-              <!-- Details -->
-              <div class="shoppingCartItemsDetails">
-                <!-- Book Details -->
-                <a href="bookdetails.html">Book Title</a>
-                <p>By John Smith</p>
-                <p>Condition: <strong>Acceptable</strong></p>
-                <p>Format: <strong>Paperback</strong></p>
-                <p><strong>3.99</strong> each</p>
-              </div>
-              <div class="shoppingCartItemsQuantity">
-                <!-- Totals -->
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                </select>
-                <p>Subtotal: <strong>$3.99</strong></p>
-                <a href="#">Remove</a>
-              </div>
-            </div>
-        </div>
-
-        <div class="shoppingCartItemsContainer">
-            <div style="width: 100px; height: 100px; float: left">
-              <!--Book Image-->
-              <a href="#"><img src="https://dummyimage.com/100x100/000/fff" alt="placeholder"></a>
-            </div>
-            <div>
-              <!-- Details -->
-              <div class="shoppingCartItemsDetails">
-                <!-- Book Details -->
-                <a href="bookdetails.html">Book Title</a>
-                <p>By John Smith</p>
-                <p>Condition: <strong>Acceptable</strong></p>
-                <p>Format: <strong>Paperback</strong></p>
-                <p><strong>3.99</strong> each</p>
-              </div>
-              <div class="shoppingCartItemsQuantity">
-                <!-- Totals -->
-                <select>
-                  <option>1</option>
-                  <option>2</option>
-                </select>
-                <p>Subtotal: <strong>$3.99</strong></p>
-                <a href="#">Remove</a>
-              </div>
-            </div>
-        </div>
+        
 
       </div>
 
@@ -152,26 +76,26 @@
           <!--Promotion Code -->
           <div class="orderSummary">
             <p>Promotion Code</p>
-            <input type="text" class="form-control">
-            <button type="button" class="btn btn-primary">Apply</button>
+            <input id="promoinput" type="text" class="form-control">
+            <button type="button" onclick="applyPromo()" class="btn btn-primary">Apply</button>
           </div>
           <hr/>
           <div class="orderSummary">
             <h4>Order Summary</h4>
             <table style="width: 100%">
               <tr>
-                <td>Items (3)</td>
-                <td>$11.97</td>
+                <td id="tditems">Items (3)</td>
+                <td id="tdprice">$11.97</td>
               </tr>
                 <td>Promotions</td>
-                <td>---</td>
+                <td id="tdpromo">---</td>
               <tr>
                 <td>Sales Tax</td>
                 <td>---</td>
               </tr>
               <tr>
                 <td><strong>Estimated Total</strong></td>
-                <td><strong>$11.97</strong></td>
+                <td id="tdpricetotal"><strong></strong></td>
               </tr>
             </table>
           </div>
