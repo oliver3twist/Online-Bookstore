@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="bookstore.css" >
+<link rel="stylesheet" href="login.css">
+
+
+<!--FIREBASE STUFF-->
+<!--Firebase App is always required and must be first-->
+        <script src="https://www.gstatic.com/firebasejs/5.5.8/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCU3PKSSVSxi2h3jhbGtBvI--r7Wgpx0l8",
+                authDomain: "bookstore-ef084.firebaseapp.com",
+                databaseURL: "https://bookstore-ef084.firebaseio.com",
+                projectId: "bookstore-ef084",
+                storageBucket: "gs://bookstore-ef084.appspot.com",
+                messagingSenderId: "540736543010"
+            };
+            firebase.initializeApp(config);
+        </script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="./scripts/login_scripts.js"></script>
+
+</head>
+<body>
+
+<form id="login_form" action="/login" method="post">
+  <div class="container mycontainer">
+    <h1 class="mt-3">Login</h1>
+    <hr>
+    <label for="username"><b>Username</b></label>
+    
+<input type="username" class="login_input_text" id="login_username" placeholder="Enter Username" name="user" required>
+   
+ <label class="mt-1" for="password"><b>Password</b></label>
+    <input type="password" class="login_input_text mb-3" id="login_password" placeholder="Enter Password" name="pass" required>
+      
+    <a href="#" class="forgot"> Forgot Password? </a>
+      
+ <hr/>  
+ 
+<button type="button" class="loginbtn" id="login_btn" onclick="loginWithEmailAndPassword()" value="Login">Login</button>
+     <script>
+	 //keypress to simulate clicking button
+    $('#login_password').keypress(function(e){
+      if(e.keyCode==13)
+      $('#login_btn').click();
+		});
+	
+	 </script>
+ <div class="signin">
+    Not yet registered? <a href="register.html">Register</a>.
+ </div> 
+      
+</div>
+</form>
+</body>
+</html>
