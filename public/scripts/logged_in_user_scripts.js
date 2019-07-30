@@ -65,16 +65,16 @@ function uniqueProfile(){
 			if (doc.exists) {
 				console.log("Document data:", doc.data());
 				//dynamic home
-				home=document.getElementById("barLink-home");
+				var home=document.getElementById("barLink-home");
 				home.setAttribute('href', 'homeReg.html');
 				home.id="barLink";
 				//dynamic profile
-				profile=document.getElementById("barLink-profile");
+				var profile=document.getElementById("barLink-profile");
 				profile.text=doc.data().FirstName+"'s Profile";
 				profile.setAttribute('href','profile.html');
 				document.getElementById("barLink-logout").id="barLink";
-				cart=document.getElementById("cart");
-				cicon=document.createElement("img");
+				var cart=document.getElementById("cart");
+				var cicon=document.createElement("img");
 				cicon.id="cartIcon";
 				cicon.setAttribute('src', 'images/cart3.png');
 				cart.appendChild(cicon);
@@ -91,13 +91,13 @@ function uniqueProfile(){
 		} else {//edit the nave bar
 			console.log("no user signed in");
 			
-			home=document.getElementById("barLink-home");
+			var home=document.getElementById("barLink-home");
 			home.setAttribute('href', 'home.html');
 			home.id="barLink";
-			signup=document.getElementById("barLink-profile");
+			var signup=document.getElementById("barLink-profile");
 			signup.text="Sign up";
 			signup.setAttribute('href','register.html');
-			nocart=document.getElementById("cart");
+			var nocart=document.getElementById("cart");
 			nocart.text="Login";
 			nocart.setAttribute('href', 'login.html');
 			nocart.id="barLink";
