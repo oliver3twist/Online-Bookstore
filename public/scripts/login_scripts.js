@@ -116,6 +116,13 @@ function checkAdmin(){
 }
 
 function resetPassword(){
-	
-	
-}
+	var auth = firebase.auth();
+	var emailAddress = document.getElementById("eaddress").value;
+	//console.log(emailAddress);
+	auth.sendPasswordResetEmail(emailAddress).then(function() {
+		// Email sent.
+		window.open("./passwordConfirm.html", "_self");
+	}).catch(function(error) {
+		// An error happened.
+	});
+}//resetPassword
