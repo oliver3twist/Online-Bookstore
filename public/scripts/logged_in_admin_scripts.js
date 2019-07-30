@@ -152,7 +152,7 @@ function uniqueProfileBilling(){
 	firebase.auth().onAuthStateChanged(function(user) {
 		if (user) {
 			var db = firebase.firestore();
-			var docRef = db.collection("billingingaddress").doc(user.uid);
+			var docRef = db.collection("billingaddress").doc(user.uid);
 
 			docRef.get().then(function(doc) {
 			if (doc.exists) {
@@ -207,7 +207,7 @@ function updateBillingAddress(){
 	firebase.auth().onAuthStateChanged(function(user){
 		if (user) {
 				var db = firebase.firestore();
-		db.collection("billingingaddress").doc(user.uid).set({
+		db.collection("billingaddress").doc(user.uid).set({
 			number: document.getElementById("billingnumber").value,
 			street: document.getElementById("billingstreet").value,
 			city: document.getElementById("billingcity").value,
