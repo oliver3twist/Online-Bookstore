@@ -826,6 +826,12 @@ function applyPromo(){
 	
 }//applyPromo
 
+function searchFunction(){
+	var query=document.getElementById("search");
+	var statement="./searchResults.html?search="+query;
+	window.open(statement,"_self");
+	
+}
 
 
 
